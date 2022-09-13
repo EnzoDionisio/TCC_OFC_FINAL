@@ -313,7 +313,7 @@ textarea:focus {
   height: 60px;
   color: #ffffff;
   border: none;
-  border-left: 3px solid #1c8314;
+  border-left: 3px solid #8000ff;
   border-radius: 0;
   padding: 0 30px;
   font-size: 16px;
@@ -322,7 +322,7 @@ textarea:focus {
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   text-transform: capitalize;
-  background-color: #40ba37; }
+  background-color: #d2d7ff; }
   .delicious-btn.active, .delicious-btn:hover, .delicious-btn:focus {
     font-size: 16px;
     font-weight: 600;
