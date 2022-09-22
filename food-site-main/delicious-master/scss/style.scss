@@ -58,7 +58,9 @@ p {
     font-weight: 400;
 }
 
-a,
+a{
+    color: $bg-default;
+}
 a:hover,
 a:focus {
     @include trans-duration(500ms);
