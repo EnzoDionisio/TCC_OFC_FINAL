@@ -1393,6 +1393,8 @@ textarea:focus {
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
+
+  
 }
 
 .card1:before {
@@ -1402,7 +1404,7 @@ textarea:focus {
   z-index: -1;
   top: -16px;
   right: -16px;
-  background: #eeb600;
+  background: #FFBF3B;
   height: 32px;
   width: 32px;
   border-radius: 32px;
@@ -1411,8 +1413,9 @@ textarea:focus {
   transition: transform 0.25s ease-out;
 }
 
+
 .card1:hover:before {
-  transform: scale(21);
+  transform: scale(30);
 }
 
 .card1 h3:hover {
