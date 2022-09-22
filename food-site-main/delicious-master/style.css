@@ -183,7 +183,7 @@ img {
     width: 60px;
     height: 60px;
     border: 2px solid #ccc;
-    border-bottom-color: #1c8314;
+    border-bottom-color: #FFBF3B;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -243,7 +243,7 @@ img {
   padding-right: 0;
   width: 30px;
   height: 30px;
-  background-color: #40ba37;
+  background-color: #FFBF3B;
   line-height: 30px;
   text-align: center;
   position: absolute;
@@ -551,7 +551,7 @@ textarea:focus {
       position: relative;
       z-index: 1;
       padding: 60px 50px;
-      border-left: 3px solid #000000;
+      border-left: 3px solid #FFBF3B;
       background-color: rgba(24, 24, 24, 0.54); }
       @media only screen and (max-width: 767px) {
         .hero-slides .single-hero-slide .hero-slides-content {
@@ -587,7 +587,7 @@ textarea:focus {
     visibility: hidden;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
-    border-bottom: 3px solid #000000; }
+    border-bottom: 3px solid #FFBF3B; }
     @media only screen and (max-width: 767px) {
       .hero-slides .owl-prev,
       .hero-slides .owl-next {
@@ -613,7 +613,7 @@ textarea:focus {
       color: #ffffff;
       margin-right: 10px; }
       .hero-slides .owl-dots .owl-dot.active {
-        color: #000000; }
+        color: #FFBF3B; }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .breakpoint-on .classynav ul li.cn-dropdown-item > a::after,
@@ -763,7 +763,7 @@ textarea:focus {
         .single-small-receipe-area .receipe-content a h5 {
           font-size: 16px; } }
       .single-small-receipe-area .receipe-content a h5:hover, .single-small-receipe-area .receipe-content a h5:focus {
-        color: #40ba37; }
+        color: #FFBF3B; }
   .single-small-receipe-area .receipe-content .ratings i {
     font-size: 11px;
     color: #fbb710;
@@ -778,7 +778,7 @@ textarea:focus {
 .quote-area {
   position: relative;
   z-index: 1;
-  border: 10px solid #40ba37;
+  border: 10px solid #FFBF3B;
   padding: 40px 25px;
   margin-bottom: 80px; }
   .quote-area span {
@@ -786,7 +786,7 @@ textarea:focus {
     font-style: italic;
     margin-bottom: 30px;
     display: block;
-    color: #40ba37;
+    color: #FFBF3B;
     line-height: 1; }
   .quote-area h4 {
     font-size: 24px;
@@ -803,7 +803,7 @@ textarea:focus {
     margin-bottom: 50px; }
   .quote-area .date-comments .date {
     font-size: 12px;
-    color: #40ba37; }
+    color: #FFBF3B; }
   .quote-area .date-comments .comments {
     font-size: 12px;
     color: #9b9b9b; }
@@ -832,7 +832,7 @@ textarea:focus {
     color: #9b9b9b;
     font-size: 12px;
     font-style: italic;
-    border-left: 3px solid #1c8314;
+    border-left: 3px solid #FFBF3B;
     padding: 0 20px;
     margin-bottom: 25px; }
   .newsletter-form p {
@@ -867,7 +867,7 @@ textarea:focus {
     .single-blog-area .blog-thumbnail .post-date {
       width: 75px;
       height: 100px;
-      background-color: #40ba37;
+      background-color: #FFBF3B;
       position: absolute;
       top: 20px;
       left: 20px;
@@ -891,7 +891,7 @@ textarea:focus {
           font-weight: 700;
           display: block; }
       .single-blog-area .blog-thumbnail .post-date:hover, .single-blog-area .blog-thumbnail .post-date:focus {
-        background-color: #1c8314; }
+        background-color: #FFBF3B; }
   .single-blog-area .blog-content {
     position: relative;
     z-index: 1;
@@ -901,7 +901,7 @@ textarea:focus {
       color: #474747;
       margin-bottom: 10px; }
       .single-blog-area .blog-content .post-title:hover, .single-blog-area .blog-content .post-title:focus {
-        color: #40ba37; }
+        color: #FFBF3B; }
     .single-blog-area .blog-content .meta-data {
       font-size: 12px;
       color: #a4a4a4;
@@ -911,7 +911,7 @@ textarea:focus {
         font-size: 12px;
         color: #a4a4a4; }
         .single-blog-area .blog-content .meta-data a:hover, .single-blog-area .blog-content .meta-data a:focus {
-          color: #40ba37; }
+          color: #FFBF3B; }
 
 .single-widget {
   position: relative;
@@ -926,7 +926,7 @@ textarea:focus {
       padding: 5px 0;
       color: #797979; }
       .single-widget .list li a:hover, .single-widget .list li a:focus {
-        color: #40ba37; }
+        color: #FFBF3B; }
 
 .pagination {
   position: relative;
@@ -939,10 +939,10 @@ textarea:focus {
     color: #474747; }
     .pagination .page-link:hover, .pagination .page-link:focus {
       background-color: transparent;
-      color: #40ba37; }
+      color: #FFBF3B; }
   .pagination .page-item.active .page-link {
     background-color: transparent;
-    color: #40ba37; }
+    color: #FFBF3B; }
 
 /* :: 15.0 Receipe Area */
 .receipe-post-search {
@@ -984,7 +984,7 @@ textarea:focus {
     visibility: hidden;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
-    border-bottom: 3px solid #1c8314; }
+    border-bottom: 3px solid #FFBF3B; }
     @media only screen and (max-width: 767px) {
       .receipe-slider .owl-prev,
       .receipe-slider .owl-next {
@@ -1009,7 +1009,7 @@ textarea:focus {
     .receipe-headline h2 {
       font-size: 24px; } }
 .receipe-headline .receipe-duration {
-  border-left: 3px solid #40ba37;
+  border-left: 3px solid #FFBF3B;
   padding: 15px; }
   .receipe-headline .receipe-duration h6 {
     font-size: 15px;
@@ -1068,7 +1068,7 @@ textarea:focus {
   width: 20px;
   height: 20px; }
 .ingredients .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #40ba37; }
+  background-color: #FFBF3B; }
 
 /* :: 16.0 Footer Area CSS */
 .footer-area {
@@ -1105,7 +1105,7 @@ textarea:focus {
       color: #4b4b4b;
       font-weight: 600; }
       .footer-area p a:hover, .footer-area p a:focus {
-        color: #40ba37; }
+        color: #FFBF3B; }
   @media only screen and (max-width: 767px) {
     .footer-area .footer-logo {
       max-width: 90px; } }
