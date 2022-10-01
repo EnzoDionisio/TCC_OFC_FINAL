@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS bucho character set utf8mb4 collate utf8mb4_unicode_ci ;
 CREATE TABLE IF NOT EXISTS bucho.Usuario (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
