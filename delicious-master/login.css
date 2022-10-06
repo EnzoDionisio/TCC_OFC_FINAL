@@ -1,0 +1,139 @@
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i");
+body{
+    font-family: "Open Sans", sans-serif;
+    background-color: rgb(255, 255, 255);
+
+    min-height: 100vh;
+}
+
+.w50{
+    width: 50%;
+
+
+}
+
+.box{
+    display: flex;
+    width: 999px;
+    border-radius: 20px;
+
+}
+form .input-group button:hover {
+    background-color:#f3ac1f;
+    transition: 0.3s;
+}
+#central{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+
+.img-box{
+    width: 50%;
+    display: flex;
+    align-items: center;
+
+    padding: 20px;
+}
+.img-box img{
+    width: 100%;
+
+}
+.form-box{
+    backdrop-filter: blur(40px);
+    padding: 30px 40px;
+    width: 50%;
+}
+.form-box h2{
+    font-size: 30px;
+}
+.form-box p{
+    font-weight: bold;
+    color: #3D3D3D;
+}
+.form-box p a {
+    color: #FFBF3B;
+}
+
+
+.form-box form{
+    margin: 20px 0;
+}
+form .input-group{
+    margin-bottom: 15px;
+}
+a:link {text-decoration: none}
+a:visited {text-decoration: none}
+a:active {text-decoration: none}
+a:hover {text-decoration: underline; color: black;}
+
+form .input-group label{
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+}
+
+form .input-group input{
+    width: 100%;
+    height: 47px;
+    outline: none;
+    border: 2px solid ;
+    padding: 15px;
+    font-size: 15px;
+    transition: all 0.4s ease;
+
+}
+
+form .input-group input:focus{
+    border-color: #FFBF3B;
+}
+
+form .input-group button{
+    width: 80%;
+    height: 47px;
+    background-color: #FFBF3B;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-top: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 12%;
+}
+
+
+@media (max-width:930px){
+    .img-box{
+        display: none;
+    }
+    .box{
+        width: 700px;
+    }
+    .form-box{
+        width: 100%;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width:500px){
+    .w50{
+        width: 100%;
+        padding: 0;
+    }
+}
+
+.lnr-ey {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    margin-top: 27px;
+}
+
+
+
+ 

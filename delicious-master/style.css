@@ -476,7 +476,7 @@ textarea:focus {
       padding: 0; }
       @media only screen and (max-width: 767px) {
         .header-area .delicious-main-menu .classy-navbar {
-          height: 80px; } }
+          height: 8px; } }
       .header-area .delicious-main-menu .classy-navbar .classynav ul li a {
         font-weight: 600; }
         .header-area .delicious-main-menu .classy-navbar .classynav ul li a:hover, .header-area .delicious-main-menu .classy-navbar .classynav ul li a:focus {
@@ -527,9 +527,34 @@ textarea:focus {
   @media only screen and (max-width: 767px) {
     .header-area .nav-brand img {
       max-width: 90px; } }
+      .header-area .delicious-main-menu .classynav .icon-login{
+      width: 50px;
+      }
 
-
-
+.icon-login{
+  size: 100px;
+  margin-left: 50px;
+}
+  .header-area .delicious-main-menu .classynav .icon-login:hover i, .header-area .delicious-main-menu .classynav .icon-login:focus i {
+        color: #FFBF3B; }
+      @media only screen and (min-width: 992px) and (max-width: 1199px) {
+        .header-area .delicious-main-menu .classynav .icon-loginn {
+          margin-left: 50px;
+          margin-top: 10px; } }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .header-area .delicious-main-menu .classynav .icon-login {
+          margin-left: 30px;
+          margin-top: 30px; } }
+      @media only screen and (max-width: 767px) {
+        .header-area .delicious-main-menu .classynav .icon-login {
+          margin-left: 30px;
+          margin-top: 30px; } }
+  @media only screen and (max-width: 767px) {
+    .header-area .nav-brand img {
+      max-width: 90px; } }
+      .header-area .delicious-main-menu .classynav .icon-login{
+      width: 50px;
+      }
 .hero-slides {
   position: relative;
   z-index: 1; }
