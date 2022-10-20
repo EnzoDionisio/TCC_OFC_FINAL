@@ -1,0 +1,71 @@
+CREATE TABLE IF NOT EXISTS `bucho`.`Usuario` (
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `senha` VARCHAR(300) NOT NULL,
+  `telefone` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
+  UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) ,
+  UNIQUE INDEX `idUsuario_UNIQUE` (`idUsuario` ASC) )
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bucho`.`Receitas_Favoritos` (
+  `Receitas_idReceitas` INT NOT NULL,
+  `Usuario_idUsuario` INT NOT NULL,
+  `Favoritos_idFavoritos` TINYINT NULL DEFAULT 'N',
+  PRIMARY KEY (`Receitas_idReceitas`),
+  INDEX `fk_Receitas_has_Favoritos_Receitas1_idx` (`Receitas_idReceitas` ASC) ,
+  INDEX `fk_Receitas_has_Favoritos_Usuario1_idx` (`Usuario_idUsuario` ASC) ,
+  CONSTRAINT `fk_Receitas_has_Favoritos_Receitas1`
+    FOREIGN KEY (`Receitas_idReceitas`)
+    REFERENCES `bucho`.`Receitas` (`idReceitas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Receitas_has_Favoritos_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `bucho`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bucho`.`Receitas` (
+  `idReceitas` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(70) NOT NULL,
+  `descricao` VARCHAR(250) NOT NULL,
+  `tempodepreparo` VARCHAR(15) NOT NULL,
+  `rendimento` VARCHAR(15) NOT NULL,
+  `ingredientes` VARCHAR(500) NOT NULL,
+  `modo de preparo` VARCHAR(2000) NOT NULL,
+  `img` MEDIUMTEXT NOT NULL,
+  `video` LONGTEXT NOT NULL,
+  PRIMARY KEY (`idReceitas`),
+  UNIQUE INDEX `idReceitas_UNIQUE` (`idReceitas` ASC) )
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bucho`.`Categorias` (
+  `idCategoria` INT NOT NULL,
+  `nomeCategoria` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idCategoria`),
+  UNIQUE INDEX `idCategoria_UNIQUE` (`idCategoria` ASC) )
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bucho`.`Receitas_has_Categorias` (
+  `Receitas_idReceitas` INT NOT NULL,
+  `Categorias_idCategoria` INT NOT NULL,
+  PRIMARY KEY (`Receitas_idReceitas`, `Categorias_idCategoria`),
+  INDEX `fk_Receitas_has_Categorias_Categorias1_idx` (`Categorias_idCategoria` ASC) ,
+  INDEX `fk_Receitas_has_Categorias_Receitas_idx` (`Receitas_idReceitas` ASC) ,
+  CONSTRAINT `fk_Receitas_has_Categorias_Receitas`
+    FOREIGN KEY (`Receitas_idReceitas`)
+    REFERENCES `bucho`.`Receitas` (`idReceitas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Receitas_has_Categorias_Categorias1`
+    FOREIGN KEY (`Categorias_idCategoria`)
+    REFERENCES `bucho`.`Categorias` (`idCategoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
