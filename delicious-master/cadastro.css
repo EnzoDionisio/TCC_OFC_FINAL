@@ -125,5 +125,14 @@ form .input-group button{
     }
 }
 
+.lnr-ey {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    margin-top: 27px;
+}
+
+
 
  
