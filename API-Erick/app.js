@@ -1,18 +1,22 @@
 const express = require('express')
 const mysql = require('mysql2');
+const cors = require('cors')
 const app = express();
+
 app.use(express.json());
-var db = mysql.createConnection({
+app.use(cors());
+
+const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "123456",
+  password: "",
   database: "bucho"
 });
-
 
 app.get('/', async (req,res) => {
   res.send('pagina inicial');
 });
+
 //salvar receita link: http://localhost:8081/salvar-receita
 app.post('/salvar-receita', async (req,res) => {
   db.connect(async (err) =>{
@@ -46,6 +50,24 @@ app.post('/cadastro', async (req,res) => {
   res.send('ta salvo meu bom');
     res.end();
 });
+
+
+app.get("/buscareceita/:idReceita", (req, res) => {
+  const idReceita = req.params.idReceita
+
+  db.query("SELECT * FROM `receitas` WHERE `idReceitas` = ?",
+  [idReceita],
+  (err, result) => {
+    if(result.length == 0) {
+      res.send("Receita não encontrada.")
+    }
+    else {
+      res.json(result[0])
+    }
+  }
+  )
+  
+})
 
 
 
