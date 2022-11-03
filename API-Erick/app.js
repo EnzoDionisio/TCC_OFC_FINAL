@@ -10,7 +10,7 @@ app.use(cors())
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "123456",
   database: "bucho"
 });
 
@@ -32,9 +32,9 @@ app.post('/salvar-receita', async (req, res) => {
   db.connect(async (err) => {
     if (err) throw err;
     console.log("Connected!");
-    const { nome, descricao, tempodepreparo, rendimento, ingredientes, mododepreparo, img, video, Categorias_idCategoria } = req.body
-    db.query("INSERT INTO `receitas`(`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `img`, `video`, `Categorias_idCategoria`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [nome, descricao, tempodepreparo, rendimento, ingredientes, mododepreparo, img, video, Categorias_idCategoria])
+    const { nome, descricao, tempodepreparo, rendimento, ingredientes, mododepreparo, dificuldade, img, video, Categorias_idCategoria } = req.body
+    db.query("INSERT INTO `receitas`(`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `dificuldade`, `img`, `video`, `Categorias_idCategoria`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [nome, descricao, tempodepreparo, rendimento, ingredientes, mododepreparo, dificuldade, img, video, Categorias_idCategoria])
   });
   res.send('ta salvo meu bom');
   res.end();
