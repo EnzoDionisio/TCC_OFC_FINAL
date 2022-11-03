@@ -128,8 +128,3 @@ app.get("/buscareceita/:idReceita", (req, res) => {
 app.listen(8081, function () {
   console.log('rodando o serve');
 });
-
-// npm i express
-// npm i mysql2
-
-//pexe roda o codigo
