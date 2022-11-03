@@ -1,0 +1,27 @@
+salvar receita exemplo
+  {
+"nome":"Brigadeiro teste",
+"descricao":"asdfasdasdfasdf",
+"tempodepreparo":"asdfsadfsdf",
+"rendimento":"sadfasdf",
+"ingredientes":"['1212','1212']",
+"mododepreparo":"['faz assim','dps assim']",
+"dificuldade":"iziiiii",
+"img":"https://www.juicysantos.com.br/wp-content/uploads/2018/06/brigadeiro-de-milho-verde-1065x710.jpg",
+"video":"https://www.youtube.com/watch?v=NorbzT1Twcc",
+"Categorias_idCategoria":"1"
+}
+
+cadastrar usuario exemplo
+ {
+"nome":"Erick",
+"email":"erick@email.com",
+"senha":"123456",
+"telefone":"000000000"
+}
+
+login exemplo
+{
+"email":"erick@email.com",
+"senha":"123456"
+}
