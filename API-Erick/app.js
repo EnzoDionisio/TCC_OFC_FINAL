@@ -72,11 +72,18 @@ app.post('/cadastro', async (req, res) => {
 //buscar info receitas com categoria 
 app.get('/categoria/:categoria', async (req, res) => {
   const categoria = req.params.categoria;
-  var sql = 'SELECT * FROM `receitas` WHERE `Categorias_idCategoria` = ?';
-  db.query(sql, [categoria], function (err, result) {
-    if (err) throw err;
-    res.send(result);
-  });
+  db.query("SELECT idCategoria FROM `categorias` WHERE `nomeCategoria` = ?",
+  [categoria],
+  (err, result) => {
+    const idCategoria = result[0].idCategoria
+    db.query('SELECT * FROM `receitas` WHERE `Categorias_idCategoria` = ?',
+    [idCategoria], 
+    (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  }
+  )
 });
 
 
