@@ -14,14 +14,10 @@ var db = mysql.createConnection({
   database: "bucho"
 });
 
-function generateHash(passwordFromUser) {
-  const salt = bcrypt.genSaltSync(12);
-  const hash = bcrypt.hashSync(passwordFromUser, salt);
-  return hash;
-}
+const salt = bcrypt.genSaltSync(12);
 
-function compareHash(passwordFromUser, hashed) {
-  return bcrypt.compareSync(passwordFromUser, hashed);
+function compareHash(password, hashed) {
+  return bcrypt.compareSync(password, hashed);
 }
 
 app.get('/', async (req, res) => {
@@ -42,28 +38,30 @@ app.post('/salvar-receita', async (req, res) => {
 
 //cadastro link: http://localhost:8081/cadastro
 
-app.post('/cadastro', async (req, res) => {
-  const { nome, email, password, telefone } = req.body
+app.post('/cadastro', async (req,res) => {
+  console.log(req.body)
+  const {nome, email, senha, telefone} = req.body
   db.query("SELECT `idUsuario` FROM `usuario` WHERE `email` = ?",
-    [email],
-    (error, result) => {
-      if (result.length == 0) {
-        db.query("INSERT INTO `usuario`(`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES (NULL, ?, ?, ?, ?)",
-          [nome, email, generateHash(password), telefone],
-          (error, result) => {
-            if (error) {
-              res.json({ "status": false, "message": "Não foi possível cadastrar o usuário. Tente novamente mais tarde, por favor." })
-            }
-            else {
-              res.json({ "status": true, "message": "Usuário cadastrado com sucesso!" })
-            }
+      [email],
+      (error, result) => {
+          if (result.length == 0) {
+            const password = bcrypt.hashSync(senha, salt);
+              db.query("INSERT INTO `usuario`(`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES (NULL, ?, ?, ?, ?)",
+                  [nome, email, password, telefone],
+                  (error, result) => {
+                      if (error) {
+                          res.json({ "status": false, "message": "Não foi possível cadastrar o usuário. Tente novamente mais tarde, por favor." })
+                      }
+                      else {
+                          res.json({ "status": true, "message": "Usuário cadastrado com sucesso!" })
+                      }
+                  }
+              )
           }
-        )
-      }
-      else {
-        res.json({ "status": false, "message": "Usuário já existente." })
-      }
-    })
+          else {
+              res.json({ "status": false, "message": "Usuário já existente." })
+          }
+      })
 });
 
 
@@ -88,24 +86,21 @@ app.get('/categoria/:categoria', async (req, res) => {
 
 
 //login
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body
+app.post('/login', async(req,res) =>{
+  const {email, senha} = req.body
   db.query("SELECT `idUsuario`, `email`, `senha` FROM `usuario` WHERE `email` = ?",
     [email],
-    (error, result) => {
-      if (result.length === 0) {
-        res.json({ "auth": false, "mesage": "email não encontrado" })
-      }
-      else {
-        if (result[0].email == email && compareHash(password, result[0].senha)) {
-          let token = jwt.sign({
-            "idUsuario": result[0].idUsuario,
-            "email": result[0].email
-          }, KWT_KEY)
-
+    (error , result) => {
+      if(result.length === 0){
+        res.json({"auth": false, "mesage": "email não encontrado"})
         }
-        else { res.json({ "auth": false, "mesage": "E-mail ou senha incorretos" }) }
-      }
+        else{
+          if (result[0].email == email && compareHash(senha, result[0].senha)){
+            console.log("logado"),
+            res.json({ "auth": true, "mesage": "Logado com sucesso !!"})
+          }
+          else{res.json({ "auth": false, "mesage": "E-mail ou senha incorretos"})}
+        }
 
     }
   )
@@ -133,8 +128,3 @@ app.get("/buscareceita/:idReceita", (req, res) => {
 app.listen(8081, function () {
   console.log('rodando o serve');
 });
-
-// npm i express
-// npm i mysql2
-
-//pexe roda o codigo
