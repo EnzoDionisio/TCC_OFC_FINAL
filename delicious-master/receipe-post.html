@@ -17,6 +17,12 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <style>
+        #processText {
+            color: #000;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -250,14 +256,6 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
-                         
-                            <h2>Nome da receita</h2>
-                            <div class="receipe-duration">
-                                <h6>Preparação:  </h6>
-                                <h6>Porções: </h6>
-                                <h6>Favoritos: </h6>
-                                <h6>Dificuldade: </h6>
-                            </div>
                         </div>
                     </div>
 
@@ -278,26 +276,7 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>01.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>02.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>03.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  </p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>04.</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  </p>
-                        </div>
+                        
                     </div>
 
                     <!-- Ingredients -->
@@ -305,23 +284,6 @@
                         <div class="ingredients">
                             <h4>Ingredients</h4>
 
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">4 Tbsp (57 gr) butter</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2">2 large eggs</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                <label class="custom-control-label" for="customCheck3">2 yogurt containers granulated sugar</label>
-                            </div>
 
                     
                         </div>
@@ -479,6 +441,67 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+        async function getData() {
+            const urlAtual = window.location.href;
+        const urlClass = new URL(urlAtual);
+        const id = urlClass.searchParams.get("id");
+
+        await fetch(`http://localhost:8081/buscareceita/${id}`)
+            .then((response) => response.json())
+            .then((data) => showData(data));
+        }
+
+        function showData(dataFromServer) {
+            const masterDiv = document.getElementsByClassName("receipe-headline my-5")[0]
+            const masterIngredientsDiv = document.getElementsByClassName("ingredients")[0]
+            const masterProcessDiv = document.getElementsByClassName("col-12 col-lg-8")[0]
+
+            const newDiv = document.createElement("div")
+            const ingredientsDiv = document.createElement("div")
+            const preparoDiv = document.createElement("div")
+
+
+            const ingredientes = eval(dataFromServer.ingredientes)
+            const preparo = eval(dataFromServer.mododepreparo)
+
+
+            newDiv.innerHTML = `<h2> ${dataFromServer.nome}</h2>
+                            <div class="receipe-duration">
+                                <h6>Preparação: ${dataFromServer.tempodepreparo} </h6>
+                                <h6>Rendimento: ${dataFromServer.rendimento}</h6>
+                                <h6>Dificuldade: ${dataFromServer.dificuldade}</h6>
+                            </div>`
+                            
+            ingredientes.forEach((element) => {
+                                ingredientsDiv.innerHTML += `
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="${element}">
+                                    <label class="custom-control-label" for="${element}">${element}</label>
+                                    </div>`
+                                    
+                                });
+                     
+            preparo.forEach((element, index) => {
+                preparoDiv.innerHTML += `
+                <div class="single-preparation-step d-flex">
+                            <h4>${index+1}.</h4>
+                            <p id="processText">${element}</p>
+                        </div>
+                
+                `
+            })
+
+            masterDiv.appendChild(newDiv)
+            masterIngredientsDiv.appendChild(ingredientsDiv)
+            masterProcessDiv.appendChild(preparoDiv)
+            
+        }
+
+
+        window.onload = getData()
+    </script>
 </body>
 
 </html>
