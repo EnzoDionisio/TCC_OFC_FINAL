@@ -6,7 +6,7 @@ salvar receita exemple mudei o o pra testar
 "rendimento":"sadfasdf",
 "ingredientes":"['1212','1212']",
 "mododepreparo":"['faz assim','dps assim']",
-"dificuldade":"iziiiii",
+"dificuldade":"facil",
 "img":"https://www.juicysantos.com.br/wp-content/uploads/2018/06/brigadeiro-de-milho-verde-1065x710.jpg",
 "video":"https://www.youtube.com/watch?v=NorbzT1Twcc",
 "Categorias_idCategoria":"1"
