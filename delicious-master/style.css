@@ -1522,6 +1522,7 @@ textarea:focus {
 #cardcategoriaenviesuareceita{
   color: white;
 }
+<<<<<<< Updated upstream
 input[type='file'] {
   display: none
 }
@@ -1553,3 +1554,12 @@ input[type='file'] {
 .envie-sua-foto{
   padding-left: 15px;
 }
+=======
+
+
+
+
+.fa-instagram {
+    font-size: 70px;
+}
+>>>>>>> Stashed changes
