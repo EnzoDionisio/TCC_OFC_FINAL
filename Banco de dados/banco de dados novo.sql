@@ -27,6 +27,7 @@ ENGINE = InnoDB;
   rendimento VARCHAR(15) NOT NULL,
   ingredientes VARCHAR(500) NOT NULL,
   mododepreparo VARCHAR(2000) NOT NULL,
+  dificuldade VARCHAR(20) NOT NULL,
   aprovado tinyint not null,
   img MEDIUMTEXT NOT NULL,
   video LONGTEXT NOT NULL,
