@@ -1522,3 +1522,34 @@ textarea:focus {
 #cardcategoriaenviesuareceita{
   color: white;
 }
+input[type='file'] {
+  display: none
+}
+
+.input-wrapper label {
+  display: flex;
+  min-width: 30px;
+  height: 60px;
+  color: #0e0e0e;
+  border: none;
+  border-left: 3px solid #0e0e0e;
+  border-radius: 0;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 58px;
+  font-weight: 600;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  text-transform: capitalize;
+  background-color: #FFBF3B;
+}
+
+.input-wrapper label:hover {
+  background-color: #FFBF3B
+}
+.input-wrapper svg{
+  margin-left: 10px;
+}
+.envie-sua-foto{
+  padding-left: 15px;
+}
