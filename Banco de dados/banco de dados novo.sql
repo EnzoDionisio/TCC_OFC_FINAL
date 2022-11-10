@@ -1,10 +1,10 @@
-
-CREATE DATABASE IF NOT EXISTS bucho character set utf8mb4 collate utf8mb4_unicode_ci ;
+CREATE database IF NOT EXISTS bucho;
+USE bucho;
 CREATE TABLE IF NOT EXISTS bucho.Usuario (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  senha VARCHAR(15) NOT NULL,
+  senha VARCHAR(300) NOT NULL,
   telefone VARCHAR(45) NOT NULL,
   PRIMARY KEY (idUsuario),
   UNIQUE INDEX email_UNIQUE (email ASC) ,
@@ -12,93 +12,50 @@ CREATE TABLE IF NOT EXISTS bucho.Usuario (
   UNIQUE INDEX idUsuario_UNIQUE (idUsuario ASC) )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS bucho.Receitas (
-  idReceitas INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(70) NOT NULL,
-  tempodepreparo VARCHAR(10) NOT NULL,
-  descricao VARCHAR(250) NOT NULL,
-  ingredientes VARCHAR(500) NOT NULL,
-  mododepreparo VARCHAR(2000) NOT NULL,
-  img MEDIUMTEXT NOT NULL,
-  video LONGTEXT NULL,
-  PRIMARY KEY (idReceitas),
-  UNIQUE INDEX idReceitas_UNIQUE (idReceitas ASC) )
-ENGINE = InnoDB;
-
 CREATE TABLE IF NOT EXISTS bucho.Categorias (
-  idCategoria INT NOT NULL,
-  cafe TINYINT NULL,
-  almoco TINYINT NULL,
-  sobremesas TINYINT NULL,
-  bebidas TINYINT NULL,
-  salgados TINYINT NULL,
+  idCategoria INT NOT NULL AUTO_INCREMENT,
+  nomeCategoria VARCHAR(50) NOT NULL,
   PRIMARY KEY (idCategoria),
   UNIQUE INDEX idCategoria_UNIQUE (idCategoria ASC) )
 ENGINE = InnoDB;
-CREATE TABLE IF NOT EXISTS bucho.Envie (
-  idEnvie INT NOT NULL AUTO_INCREMENT,
-  nomeReceita VARCHAR(70) NOT NULL,
-  tempodepreparo VARCHAR(10) NOT NULL,
+
+ CREATE TABLE IF NOT EXISTS bucho.Receitas (
+  idReceitas INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(70) NOT NULL,
   descricao VARCHAR(250) NOT NULL,
-  igredientes VARCHAR(500) NOT NULL,
+  tempodepreparo VARCHAR(15) NOT NULL,
+  rendimento VARCHAR(15) NOT NULL,
+  ingredientes VARCHAR(500) NOT NULL,
   mododepreparo VARCHAR(2000) NOT NULL,
+  aprovado tinyint not null,
   img MEDIUMTEXT NOT NULL,
-  video LONGTEXT NULL,
+  video LONGTEXT NOT NULL,
   Categorias_idCategoria INT NOT NULL,
-  PRIMARY KEY (idEnvie, Categorias_idCategoria),
-  INDEX fk_Envie_Categorias1_idx (Categorias_idCategoria ASC) ,
-  CONSTRAINT fk_Envie_Categorias1
-    FOREIGN KEY (Categorias_idCategoria)
-    REFERENCES bucho.Categorias (idCategoria)
+  PRIMARY KEY (idReceitas),
+  UNIQUE INDEX idReceitas_UNIQUE (idReceitas ASC) ,
+  INDEX fk_Receitas_Categorias_idx (Categorias_idCategoria ASC) ,
+    FOREIGN KEY (Categorias_idCategoria) references categorias(idCategoria)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS bucho.Favoritos (
-  idFavoritos INT NOT NULL,
-  Usuario_idUsuario INT NOT NULL,
-  PRIMARY KEY (idFavoritos, Usuario_idUsuario),
-  INDEX fk_Favoritos_Usuario1_idx (Usuario_idUsuario ASC) ,
-  CONSTRAINT fk_Favoritos_Usuario1
-    FOREIGN KEY (Usuario_idUsuario)
-    REFERENCES bucho.Usuario (idUsuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS bucho.comentarios (
+  idComent INT NOT NULL AUTO_INCREMENT,
+  receitas_idReceitas INT NOT NULL,
+  titulo varchar (75),
+  texto varchar (500),
+  PRIMARY KEY (idComent),
+  FOREIGN KEY (receitas_idReceitas) references receitas(idReceitas),
+  UNIQUE INDEX idComent_UNIQUE (idComent ASC) )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS bucho.Receitas_has_Favoritos (
-  Receitas_idReceitas INT NOT NULL,
-  Favoritos_idFavoritos INT NOT NULL,
-  Favoritos_Usuario_idUsuario INT NOT NULL,
-  PRIMARY KEY (Receitas_idReceitas, Favoritos_idFavoritos, Favoritos_Usuario_idUsuario),
-  INDEX fk_Receitas_has_Favoritos_Favoritos1_idx (Favoritos_idFavoritos ASC, Favoritos_Usuario_idUsuario ASC) ,
-  INDEX fk_Receitas_has_Favoritos_Receitas1_idx (Receitas_idReceitas ASC) ,
-  CONSTRAINT fk_Receitas_has_Favoritos_Receitas1
-    FOREIGN KEY (Receitas_idReceitas)
-    REFERENCES bucho.Receitas (idReceitas)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_Receitas_has_Favoritos_Favoritos1
-    FOREIGN KEY (Favoritos_idFavoritos , Favoritos_Usuario_idUsuario)
-    REFERENCES bucho.Favoritos (idFavoritos , Usuario_idUsuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS bucho.usuCom (
+   idUsuCom INT NOT NULL AUTO_INCREMENT,
+   comentarios_idComent INT,
+   usuario_idUsuario INT,
+   PRIMARY KEY (idUsuCom),
+   FOREIGN KEY (comentarios_idComent) references comentarios(idComent),
+   FOREIGN KEY (usuario_idUsuario) references usuario(idUsuario)
+) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS bucho.Receitas_has_Categorias (
-  Receitas_idReceitas INT NOT NULL,
-  Categorias_idCategoria INT NOT NULL,
-  PRIMARY KEY (Receitas_idReceitas, Categorias_idCategoria),
-  INDEX fk_Receitas_has_Categorias_Categorias1_idx (Categorias_idCategoria ASC) ,
-  INDEX fk_Receitas_has_Categorias_Receitas_idx (Receitas_idReceitas ASC) ,
-  CONSTRAINT fk_Receitas_has_Categorias_Receitas
-    FOREIGN KEY (Receitas_idReceitas)
-    REFERENCES bucho.Receitas (idReceitas)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_Receitas_has_Categorias_Categorias1
-    FOREIGN KEY (Categorias_idCategoria)
-    REFERENCES bucho.Categorias (idCategoria)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES  (NULL, 'doce'), (NULL, 'salgado'), (NULL, 'cafe'), (NULL, 'completo'), (NULL, 'sustentavel'), (NULL, 'almoco')
