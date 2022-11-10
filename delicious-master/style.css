@@ -900,7 +900,12 @@ textarea:focus {
     @media only screen and (min-width: 992px) and (max-width: 1199px) {
       .newsletter-area h4 {
         font-size: 20px; } }
-
+.outras-categorias{
+  margin-bottom: 50px;
+}
+.todas-categorias{
+  margin-top: 20px;
+}
 .newsletter-form {
   padding: 30px 15px 100px; }
   .newsletter-form form input {
@@ -921,9 +926,9 @@ textarea:focus {
     margin-bottom: 0;
     font-style: italic;
   padding-bottom: 20px; }
-  .newsletter-form button{
- align-tracks: a;
-  }
+  /*.newsletter-form p a{
+  
+  }/*
 
 /* :: 13.0 Delicious Adds */
 .delicious-add {
