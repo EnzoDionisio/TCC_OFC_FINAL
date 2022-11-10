@@ -1,3 +1,18 @@
+(function ($) {
+    'use strict';
+
+    var browserWindow = $(window);
+
+    browserWindow.on('load', function () {
+        $('#teste').fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
+    
+})
+
+
+
 let btn = document.querySelector('.lnr-ey');
 const olhojs = document.getElementById("olho")
 btn.addEventListener('click', function() {
