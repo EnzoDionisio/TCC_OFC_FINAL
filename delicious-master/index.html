@@ -171,7 +171,7 @@
                                 </svg> 
                                 </div>
                                 <div class="nav-text">
-                                <p><a href="login.html">Login </a></p>
+                                <p><a id="login-text" href="login.html">Login </a></p>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -483,6 +483,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+        function verifyUserStatus() {
+            if(localStorage.getItem("auth")) {
+                document.getElementById("login-text").innerHTML = localStorage.getItem("username")
+            }
+        }
+
+        window.onload = verifyUserStatus()
+    </script>
 </body>
 
 </html>

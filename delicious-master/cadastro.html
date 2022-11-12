@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="email">E-mai</label>
+                    <label for="email">E-mail</label>
                     <input type="email" id="email" placeholder="Digite o seu email" required>
                 </div>
 
@@ -63,7 +63,7 @@
                 </div>
                 
                 <div class="input-group">
-                    <button>Cadastrar</button>
+                    <button onclick="catchInputAndFetchData()">Cadastrar</button>
                 </div>
 
             </form>
@@ -80,5 +80,41 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+        async function catchInputAndFetchData() {
+            const nome = document.getElementById("nome").value
+            const email = document.getElementById("email").value
+            const senha = document.getElementById("senha").value
+            const telefone= document.getElementById("telefone").value 
+
+            const userData = 
+                {
+	                "nome": nome,
+	                "email": email, 
+	                "senha": senha,
+	                "telefone": telefone
+               }
+
+            await fetch(`http://localhost:8081/cadastro`, {"method": "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => verifyStatus(data));
+        }
+
+        function verifyStatus(userInfo) {
+            const {status, message} = userInfo
+
+            if(status) {
+                alert(message)
+                window.location.href = "login.html"
+            }
+            else {
+                alert(message)
+            }
+        }
+            
+        
+
+    </script>
 </body>
 </html>

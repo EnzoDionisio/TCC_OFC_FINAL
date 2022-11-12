@@ -57,7 +57,7 @@
                      
                 </div>
                 <div class="input-group">
-                    <button>Continuar</button>
+                    <button onclick="catchInputAndFetchData()">Continuar</button>
                 </div>
                
                 <div class="registro">                <p> Ainda não tem conta? <a href="cadastro.html">Registre-se</a></p>
@@ -87,5 +87,40 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+        async function catchInputAndFetchData() {
+            const email = document.getElementById("email").value
+            const senha = document.getElementById("password").value
+
+            const userData = 
+                {
+	                "email": email, 
+	                "senha": senha,
+               }
+
+            await fetch(`http://localhost:8081/login`, {"method": "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => verifyStatus(data));
+        }
+
+        function verifyStatus(userInfo) {
+            const {auth, message, userData} = userInfo
+            const {name} = userData
+
+            if(auth) {
+                localStorage.setItem("auth", auth)
+                localStorage.setItem("username", name)
+                alert(message)
+                window.location.href = "index.html"
+            }
+            else {
+                alert(message)
+            }
+        }
+            
+        
+
+    </script>
 </body>
 </html>

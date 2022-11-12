@@ -3,14 +3,19 @@ const mysql = require('mysql2');
 const app = express();
 const bcrypt = require('bcrypt');
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json())
 app.use(cors())
 
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "123456",
+  password: "",
   database: "bucho"
 });
 
@@ -88,18 +93,19 @@ app.get('/categoria/:categoria', async (req, res) => {
 //login
 app.post('/login', async(req,res) =>{
   const {email, senha} = req.body
-  db.query("SELECT `idUsuario`, `email`, `senha` FROM `usuario` WHERE `email` = ?",
+  db.query("SELECT `idUsuario`, `nome`, `email`, `senha` FROM `usuario` WHERE `email` = ?",
     [email],
     (error , result) => {
+      const userData = {"name": result[0].nome}
       if(result.length === 0){
-        res.json({"auth": false, "mesage": "email não encontrado"})
+        res.json({"auth": false, "message": "email não encontrado"})
         }
         else{
           if (result[0].email == email && compareHash(senha, result[0].senha)){
             console.log("logado"),
-            res.json({ "auth": true, "mesage": "Logado com sucesso !!"})
+            res.json({ "auth": true, "message": "Logado com sucesso !!", userData})
           }
-          else{res.json({ "auth": false, "mesage": "E-mail ou senha incorretos"})}
+          else{res.json({ "auth": false, "message": "E-mail ou senha incorretos"})}
         }
 
     }
