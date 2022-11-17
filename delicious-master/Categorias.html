@@ -394,10 +394,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         const urlClass = new URL(urlAtual);
         const tipo = urlClass.searchParams.get("tipo");
 
-        await fetch(`http://localhost:8081/categoria/${tipo}`)
+        if(tipo) {       
+            await fetch(`http://localhost:8081/categoria/${tipo}`)
             .then((response) => response.json())
             .then((data) => showData(data));
         }
+    }
+
 
         function showData(dataFromServer) {
             const postDiv = document.getElementsByClassName("blog-posts-area")[0]

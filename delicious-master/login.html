@@ -106,11 +106,11 @@
 
         function verifyStatus(userInfo) {
             const {auth, message, userData} = userInfo
-            const {name} = userData
+            const {id} = userData
 
             if(auth) {
                 localStorage.setItem("auth", auth)
-                localStorage.setItem("username", name)
+                localStorage.setItem("id", id)
                 alert(message)
                 window.location.href = "index.html"
             }

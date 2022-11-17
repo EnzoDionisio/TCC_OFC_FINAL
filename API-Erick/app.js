@@ -96,14 +96,14 @@ app.post('/login', async(req,res) =>{
   db.query("SELECT `idUsuario`, `nome`, `email`, `senha` FROM `usuario` WHERE `email` = ?",
     [email],
     (error , result) => {
-      const userData = {"name": result[0].nome}
+      const userData = {"id": result[0].idUsuario}
       if(result.length === 0){
         res.json({"auth": false, "message": "email não encontrado"})
         }
         else{
           if (result[0].email == email && compareHash(senha, result[0].senha)){
             console.log("logado"),
-            res.json({ "auth": true, "message": "Logado com sucesso !!", userData})
+            res.json({ "auth": true, "message": "Logado com sucesso!", userData})
           }
           else{res.json({ "auth": false, "message": "E-mail ou senha incorretos"})}
         }
@@ -128,19 +128,26 @@ app.get("/buscareceita/:idReceita", (req, res) => {
       }
     }
   )
-  db.query("SELECT * FROM `comentarios` WHERE `receitas_idReceitas` = ?",
-  [idReceita],
-  (err, result) => {
-    if (result.length == 0){
-      res.send("Ainda Não Temos Comentarios Para Essa Receita")
-    }
-    else {
-      res.json(result[0])
-    }
-  }
-  )
 })
 
+app.post("/favoritos", (req, res) => {
+  const {id} = req.body
+
+  db.query("SELECT `idReceitFav` FROM `usufav` WHERE `idUsuFav` = ?", 
+  [id], 
+  (err, result) => {
+    res.json(result)
+  })
+})
+
+app.post("/userdata", (req, res) => {
+  const {id} = req.body
+  db.query("SELECT `nome` FROM `usuario` WHERE `idUsuario` = ?",
+  [id],
+  (err, result) => {
+    res.json(result[0])
+  })
+})
 
 app.listen(8081, function () {
   console.log('rodando o serve');
