@@ -1,11 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.1.3
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 17-Nov-2022 às 12:41
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.4
+-- criar e selecionar banco de dados
+CREATE database IF NOT EXISTS bucho;
+USE bucho;
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,7 +17,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `categorias`
 --
 
-CREATE TABLE `categorias` (
+CREATE TABLE IF NOT EXISTS `categorias` (
   `idCategoria` int(11) NOT NULL,
   `nomeCategoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -44,7 +40,7 @@ INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES
 -- Estrutura da tabela `comentarios`
 --
 
-CREATE TABLE `comentarios` (
+CREATE TABLE IF NOT EXISTS `comentarios` (
   `idComent` int(11) NOT NULL,
   `receitas_idReceitas` int(11) NOT NULL,
   `titulo` varchar(75) DEFAULT NULL,
@@ -57,7 +53,7 @@ CREATE TABLE `comentarios` (
 -- Estrutura da tabela `receitas`
 --
 
-CREATE TABLE `receitas` (
+CREATE TABLE IF NOT EXISTS`receitas` (
   `idReceitas` int(11) NOT NULL,
   `nome` varchar(70) NOT NULL,
   `descricao` varchar(250) NOT NULL,
@@ -75,16 +71,13 @@ CREATE TABLE `receitas` (
 -- Extraindo dados da tabela `receitas`
 --
 
-INSERT INTO `receitas` (`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES
-(1, 'feijão', 'feijão gostoso', '20 min', '12 porções', 'feijão', 'tempere feijão', 1, '121313212', '12112', 2);
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS`usuario` (
   `idUsuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -92,12 +85,9 @@ CREATE TABLE `usuario` (
   `telefone` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
+
 -- Extraindo dados da tabela `usuario`
 --
-
-INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES
-(1, 'isabella ', 'isa', '$2b$12$lLksiOchR2Bw39afGSUYU.tfnIW86M1eKngSev8enZCaMCDZCFrBy', '12345678');
 
 -- --------------------------------------------------------
 
@@ -105,7 +95,7 @@ INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES
 -- Estrutura da tabela `usucom`
 --
 
-CREATE TABLE `usucom` (
+CREATE TABLE IF NOT EXISTS`usucom` (
   `idUsuCom` int(11) NOT NULL,
   `comentarios_idComent` int(11) DEFAULT NULL,
   `usuario_idUsuario` int(11) DEFAULT NULL
@@ -117,7 +107,7 @@ CREATE TABLE `usucom` (
 -- Estrutura da tabela `usufav`
 --
 
-CREATE TABLE `usufav` (
+CREATE TABLE IF NOT EXISTS`usufav` (
   `idFav` int(11) NOT NULL,
   `idUsuFav` int(11) NOT NULL,
   `idReceitFav` int(11) NOT NULL
@@ -126,9 +116,6 @@ CREATE TABLE `usufav` (
 --
 -- Extraindo dados da tabela `usufav`
 --
-
-INSERT INTO `usufav` (`idFav`, `idUsuFav`, `idReceitFav`) VALUES
-(1, 1, 1);
 
 --
 -- Índices para tabelas despejadas
