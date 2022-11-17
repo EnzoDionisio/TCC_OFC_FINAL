@@ -15,7 +15,7 @@ app.use(cors())
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "123456",
   database: "bucho"
 });
 
@@ -148,6 +148,17 @@ app.post("/userdata", (req, res) => {
     res.json(result[0])
   })
 })
+
+// buscar comentario com receita
+app.get('/comentario/:idReceita', async (req, res) => {
+  const receita = req.params.idReceita;
+  db.query("SELECT * FROM `comentarios` WHERE `receitas_idReceitas` = ?",
+  [receita],
+  (result) => {
+    res.json(result[0])
+  }
+  )
+});
 
 app.listen(8081, function () {
   console.log('rodando o serve');
