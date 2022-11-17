@@ -79,7 +79,7 @@ app.get('/categoria/:categoria', async (req, res) => {
   [categoria],
   (err, result) => {
     const idCategoria = result[0].idCategoria
-    db.query('SELECT * FROM `receitas` WHERE `Categorias_idCategoria` = ?',
+    db.query('SELECT * FROM `receitas` WHERE `aprovado` = 1 AND `Categorias_idCategoria` = ?',
     [idCategoria], 
     (err, result) => {
       if (err) throw err;
@@ -127,6 +127,17 @@ app.get("/buscareceita/:idReceita", (req, res) => {
         res.json(result[0])
       }
     }
+  )
+  db.query("SELECT * FROM `comentarios` WHERE `receitas_idReceitas` = ?",
+  [idReceita],
+  (err, result) => {
+    if (result.length == 0){
+      res.send("Ainda Não Temos Comentarios Para Essa Receita")
+    }
+    else {
+      res.json(result[0])
+    }
+  }
   )
 })
 
