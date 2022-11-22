@@ -15,7 +15,7 @@ app.use(cors())
 var db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "123456",
+  password: "",
   database: "bucho"
 });
 
@@ -131,13 +131,31 @@ app.get("/buscareceita/:idReceita", (req, res) => {
 })
 
 app.post("/favoritos", (req, res) => {
-  const {id} = req.body
+  const {userId} = req.body
+
 
   db.query("SELECT `idReceitFav` FROM `usufav` WHERE `idUsuFav` = ?", 
-  [id], 
+  [userId], 
   (err, result) => {
     res.json(result)
   })
+})
+
+app.post("/favoritar", (req, res) => {
+  const { recipeId, userId } = req.body
+
+  db.query("SELECT * FROM `usufav` WHERE `idUsuFav` = ? && `idReceitFav` = ?",
+    [userId, recipeId],
+    (err, result) => {
+      if (result.length == 0) {
+        db.query("INSERT INTO `usufav`(`idFav`, `idUsuFav`, `idReceitFav`) VALUES (NULL,?,?)",
+          [userId, recipeId],
+          (err, result) => {
+            res.json({"status": true, "message": "receita favoritada com sucesso!"})
+          })
+      }
+    })
+
 })
 
 app.post("/userdata", (req, res) => {
