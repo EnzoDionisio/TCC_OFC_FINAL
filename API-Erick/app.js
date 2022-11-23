@@ -134,7 +134,7 @@ app.post("/favoritos", (req, res) => {
   const {userId} = req.body
 
 
-  db.query("SELECT `idReceitFav` FROM `usufav` WHERE `idUsuFav` = ?", 
+  db.query("SELECT * FROM `usufav` WHERE `idUsuFav` = ?", 
   [userId], 
   (err, result) => {
     res.json(result)
@@ -148,11 +148,19 @@ app.post("/favoritar", (req, res) => {
     [userId, recipeId],
     (err, result) => {
       if (result.length == 0) {
-        db.query("INSERT INTO `usufav`(`idFav`, `idUsuFav`, `idReceitFav`) VALUES (NULL,?,?)",
-          [userId, recipeId],
+        db.query("SELECT `nome`, `descricao`,`img` FROM `receitas` WHERE `idReceitas` = ?",
+        [recipeId],
+        (err, result) => {
+          const {nome, descricao, img} = result[0]
+
+          db.query("INSERT INTO `usufav`(`idFav`, `idUsuFav`, `idReceitFav`, `titulo`, `descricao`, `img`) VALUES (NULL,?,?,?,?,?)",
+          [userId, recipeId, nome, descricao, img],
           (err, result) => {
-            res.json({"status": true, "message": "receita favoritada com sucesso!"})
+              res.json({"status": true, "message": "Receita favoritada com sucesso!"})
           })
+        })
+
+        
       }
     })
 
@@ -168,12 +176,14 @@ app.post("/userdata", (req, res) => {
 })
 
 // buscar comentario com receita
-app.get('/comentario/:idReceita', async (req, res) => {
-  const receita = req.params.idReceita;
-  db.query("SELECT * FROM `comentarios` WHERE `receitas_idReceitas` = ?",
-  [receita],
-  (result) => {
-    res.json(result[0])
+app.post('/comentario', async (req, res) => {
+  const {userId, recipeId, data} = req.body
+  const {name, email, titulo, mensagem} = data
+
+  db.query("INSERT INTO `comentarios`(`idComent`, `iduser`, `receitas_idReceitas`, `titulo`, `texto`, `nome`, `email`) VALUES (null,?,?,?,?, ?, ?)",
+  [userId, recipeId, titulo, mensagem, name, email],
+  (err, result) => {
+    console.log(err)
   }
   )
 });
@@ -181,3 +191,4 @@ app.get('/comentario/:idReceita', async (req, res) => {
 app.listen(8081, function () {
   console.log('rodando o serve');
 });
+

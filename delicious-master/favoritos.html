@@ -429,20 +429,30 @@
         async function showData(dataFromServer) {
 
 
-            dataFromServer.forEach(async element => {
-                await fetch(`http://localhost:8081/buscareceita/${element.idReceitFav}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        recipesFavArray.push(data)
-                    });
-            })
-
             const postDiv = document.getElementsByClassName("blog-posts-area")[0]
 
             const posts = document.createElement("div")
 
-            recipesFavArray.forEach(element => {
-                console.log(element)
+
+            dataFromServer.forEach(element => {
+                posts.innerHTML += `
+                <div class="single-blog-area mb-80">
+                            <!-- Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <img src=${element.img}" alt="">
+                                <!-- Post Date -->
+                             
+                            </div>
+                            <!-- Content -->
+                            <div class="blog-content">
+                                <a href="http://127.0.0.1:5500/delicious-master/receipe-post.html?id=${element.idReceitFav}" class="post-title">${element.titulo}</a>
+                                </div>
+                                <p>${element.descricao}</p>
+                                <a href="http://127.0.0.1:5500/delicious-master/receipe-post.html?id=${element.idReceitFav}" class="btn delicious-btn mt-30">Ver receita</a>
+                            </div>
+                        </div>
+                
+                `
             });
 
             postDiv.appendChild(posts)
