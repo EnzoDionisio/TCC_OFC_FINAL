@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 var db = mysql.createConnection({
-  host: "localhost",
+  host: "localhost", 
   user: "root",
   password: "",
   database: "bucho"
