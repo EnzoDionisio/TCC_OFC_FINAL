@@ -325,106 +325,11 @@
                 </div>
                 <div class="comment-widgets scrollable">
                   <!-- Comment Row -->
-                  <div class="d-flex flex-row comment-row mt-0">
-                    <div class="p-2">
-                      <img
-                        src="assets/images/users/1.jpg"
-                        alt="user"
-                        width="50"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <div class="comment-text w-100">
-                      <h6 class="font-medium">James Anderson</h6>
-                      <span class="mb-3 d-block"
-                        >Lorem Ipsum is simply dummy text of the printing and
-                        type setting industry.
-                      </span>
-                      <div class="comment-footer">
-                        <span class="text-muted float-end">April 14, 2021</span>
-                       
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm text-white"
-                        >
-                          Publicar
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm text-white"
-                        >
-                          Deletar
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <!-- Comment Row -->
-                  <div class="d-flex flex-row comment-row">
-                    <div class="p-2">
-                      <img
-                        src="assets/images/users/4.jpg"
-                        alt="user"
-                        width="50"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <div class="comment-text active w-100">
-                      <h6 class="font-medium">Michael Jorden</h6>
-                      <span class="mb-3 d-block"
-                        >Lorem Ipsum is simply dummy text of the printing and
-                        type setting industry.
-                      </span>
-                      <div class="comment-footer">
-                        <span class="text-muted float-end">May 10, 2021</span>
-                       
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm text-white"
-                        >
-                          Publicar
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm text-white"
-                        >
-                          Deletar
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <!-- Comment Row -->
-                  <div class="d-flex flex-row comment-row">
-                    <div class="p-2">
-                      <img
-                        src="assets/images/users/5.jpg"
-                        alt="user"
-                        width="50"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <div class="comment-text w-100">
-                      <h6 class="font-medium">Johnathan Doeting</h6>
-                      <span class="mb-3 d-block"
-                        >Lorem Ipsum is simply dummy text of the printing and
-                        type setting industry.
-                      </span>
-                      <div class="comment-footer">
-                        <span class="text-muted float-end">August 1, 2021</span>
-                       
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm text-white"
-                        >
-                          Publicar
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm text-white"
-                        >
-                          Deletar
-                        </button>
-                      </div>
-                    </div>
+                  
                   </div>
                 </div>
               </div>
@@ -694,5 +599,78 @@
     <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
    
+    <script>
+      async function fetchComments() {
+        fetch("http://localhost:8081/comentarioadmin", {method: "POST", headers: {"Content-Type": "application/json"}})
+              .then((response) => response.json())
+              .then((data) => insertComments(data));
+      }
+
+      function insertComments(dataFromServer) {
+        let comments = document.createElement("div")
+        const geralDiv = document.getElementsByClassName("comment-widgets scrollable ps-container ps-theme-default")[0]
+        
+        dataFromServer.forEach(element => {
+          comments.innerHTML += `
+          <div class="d-flex flex-row comment-row mt-0">
+                    <div class="p-2">
+                      <img
+                        src="assets/images/users/1.jpg"
+                        alt="user"
+                        width="50"
+                        class="rounded-circle"
+                      />
+                    </div>
+                    <div class="comment-text w-100">
+                      <h6 class="font-medium">${element.nome}</h6>
+                      <span class="mb-3 d-block"
+                        >
+                        ${element.texto}
+                      </span>
+                      <div class="comment-footer">
+                        <span class="text-muted float-end">April 14, 2021</span>
+                       
+                        <button
+                        onclick="aproveComments(${element.idComent})"
+                          type="button"
+                          class="btn btn-success btn-sm text-white"
+                        >
+                          Publicar
+                        </button>
+                        <button
+                        onclick="deleteComments(${element.idComent})"
+                          type="button"
+                          class="btn btn-danger btn-sm text-white"
+                        >
+                          Deletar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+          `
+        });
+
+        geralDiv.appendChild(comments)
+      }
+
+      function aproveComments(idComent) {
+        const commentData = {
+          "idComent": idComent
+        }
+        fetch("http://localhost:8081/aprovecomentario", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
+        window.location.reload();
+      }
+
+      function deleteComments(idComent) {
+        const commentData = {
+          "idComent": idComent
+        }
+        fetch("http://localhost:8081/deletecomentario", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
+        window.location.reload();
+      }
+
+
+      window.onload = fetchComments()
+    </script>
   </body>
 </html>

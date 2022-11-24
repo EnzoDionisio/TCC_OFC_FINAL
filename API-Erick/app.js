@@ -180,13 +180,35 @@ app.post('/comentario', async (req, res) => {
   const {userId, recipeId, data} = req.body
   const {name, email, titulo, mensagem} = data
 
-  db.query("INSERT INTO `comentarios`(`idComent`, `iduser`, `receitas_idReceitas`, `titulo`, `texto`, `nome`, `email`) VALUES (null,?,?,?,?, ?, ?)",
-  [userId, recipeId, titulo, mensagem, name, email],
+  console.log(req.body)
+
+  db.query("INSERT INTO `comentarios`(`idComent`, `receitas_idReceitas`, `titulo`, `texto`, `nome`, `email`, `idUser`, `aproved`, `deleted`) VALUES (null,?,?,?,?,?,?, 0, 0)",
+  [recipeId, titulo, mensagem, name, email, userId],
   (err, result) => {
-    console.log(err)
   }
   )
 });
+
+app.post('/comentarioadmin', async (req, res) => {
+  db.query("SELECT `nome`, `texto`, `idComent` FROM `comentarios` WHERE `aproved` = 0 && `deleted` = 0",
+  (err, result) => {
+    res.json(result)
+  })
+})
+
+app.post('/aprovecomentario', async (req, res) => {
+  const {idComent} = req.body
+
+  db.query("UPDATE `comentarios` SET `aproved`= 1 WHERE `idComent` = ?",
+  [idComent])
+})
+
+app.post("/deletecomentario", (req, res) => {
+  const {idComent} = req.body
+
+  db.query("UPDATE `comentarios` SET `deleted`= 1 WHERE `idComent` = ?",
+  [idComent])
+})
 
 app.listen(8081, function () {
   console.log('rodando o serve');

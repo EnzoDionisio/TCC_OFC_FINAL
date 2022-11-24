@@ -561,6 +561,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         window.onload = getData()
     </script>
+    <script>
+        async function verifyUserStatus() {
+            if(localStorage.getItem("auth")) {
+            const userData = {"id": localStorage.getItem("id")}
+              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+              .then((response) => response.json())
+              .then((data) => insertUserData(data));
+            }
+        }
+
+        function insertUserData(dataFromServer) {
+            const { nome } = dataFromServer
+
+            document.getElementById("login-text").innerHTML = nome
+        }
+
+        window.onload = verifyUserStatus()
+    </script>
 </body>
 
 </html>
