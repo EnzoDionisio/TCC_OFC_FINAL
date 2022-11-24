@@ -14,36 +14,32 @@
       content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Home Adm Bucho</title>
+    <title>Escrever receita</title>
     <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../assets/images/favicon.png"
-    />
+    <link rel="icon" href="/delicious-master/img/core-img/salada.png">
+
     <!-- Custom CSS -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="../assets/libs/select2/dist/css/select2.min.css"
+      href="assets/libs/select2/dist/css/select2.min.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../assets/libs/jquery-minicolors/jquery.minicolors.css"
+      href="assets/libs/jquery-minicolors/jquery.minicolors.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+      href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="../assets/libs/quill/dist/quill.snow.css"
+      href="assets/libs/quill/dist/quill.snow.css"
     />
-    <link href="../dist/css/style.min.css" rel="stylesheet" />
+    <link href="dist/css/style.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -89,7 +85,7 @@
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                 <!-- Dark Logo icon -->
                 <img
-                  src="../assets/images/logo-icon.png"
+                  src="assets/images/logo-icon.png"
                   alt="homepage"
                   class="light-logo"
                   width="25"
@@ -100,7 +96,7 @@
               <span class="logo-text ms-2">
                 <!-- dark Logo text -->
                 <img
-                  src="../assets/images/logo-text.png"
+                  src="assets/images/logo-text.png"
                   alt="homepage"
                   class="light-logo"
                 />
@@ -148,7 +144,8 @@
               </li>
               <!-- ============================================================== -->
               <!-- create new -->
-            
+              <!-- ============================================================== -->
+           
               <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
@@ -175,14 +172,14 @@
               <!-- ============================================================== -->
               <!-- Comment -->
               <!-- ============================================================== -->
-              
+           
               <!-- ============================================================== -->
               <!-- End Comment -->
               <!-- ============================================================== -->
               <!-- ============================================================== -->
               <!-- Messages -->
               <!-- ============================================================== -->
-          
+              
               <!-- ============================================================== -->
               <!-- End Messages -->
               <!-- ============================================================== -->
@@ -206,7 +203,7 @@
                   aria-expanded="false"
                 >
                   <img
-                    src="../assets/images/users/1.jpg"
+                    src="assets/images/users/1.jpg"
                     alt="user"
                     class="rounded-circle"
                     width="31"
@@ -216,12 +213,12 @@
                   class="dropdown-menu dropdown-menu-end user-dd animated"
                   aria-labelledby="navbarDropdown"
                 >
-             
+                
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:void(0)"
                     ><i class="fa fa-power-off me-1 ms-1"></i> Logout</a
                   >
-                
+                 
                 </ul>
               </li>
               <!-- ============================================================== -->
@@ -246,27 +243,28 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="index.html"
+                  href="indexadm.html"
                   aria-expanded="false"
                   ><i class="mdi mdi-view-dashboard"></i
-                  ><span class="hide-menu">Home</span></a
+                  ><span class="hide-menu">Dashboard</span></a
                 >
               </li>
-            
+         
+     
           
              
-            
               <li class="sidebar-item">
                 <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="form-basic.html"
+                  class="sidebar-link-disabled waves-effect waves-dark sidebar-link"
+                  href=""
                   aria-expanded="false"
-                  ><i class="mdi mdi-view-dashboard"></i
-                  ><span class="hide-menu">Upar receitas</span></a
+                  ><i class="mdi mdi-relative-scale"></i
+                  ><span class="hide-menu">Escrever Receita</span></a
                 >
               </li>
             
-         
+            
+        
             </ul>
           </nav>
           <!-- End Sidebar navigation -->
@@ -286,7 +284,7 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Escrever receitas e publicar</h4>
+              <h4 class="page-title">Escrever receita</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -309,52 +307,74 @@
         <div class="container-fluid">
           <!-- ============================================================== -->
           <!-- Start Page Content -->
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Escreva aqui:</h4>                   
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-md-6">
+             
+              <div class="card">
                 
-                <label class="col-md-3 mt-3">Selecione as categorias</label>
-                <div class="form-group row"></div>
-                <div class="col-md-9">
+                 
+                  
+                    </div>
+                  </div>
+                 
+            
+            
+          <!-- editor -->
+          <div class="row">
+            <div class="col-12">
+              
+              <div class="card">
+                
+                <div class="card-body">
+                  <label>Selecione as categorias</label>
+                  <div>
+                    <select
+                      class="select2 form-select shadow-none mt-3"
+                      multiple="multiple"
+                      style="height: 36px; width: 100%"
+                    >
+                      <optgroup label="Categorias">
+                        <option value="Doc">Doces</option>
+                        <option value="Salg">Salgadas</option>
+                        <option value="Compl">Completo</option>
+                        <option value="Cafe">Café da manhã</option>
+                        <option value="AlmJant">Almoço/jantar</option>
+                        <option value="ReceiSus">Receitas Sustentáveis</option>
 
-                  <select
-                    class="select2 form-select shadow-none mt-3"
-                    multiple="multiple"
-                    style="height: 36px; width: 100%"
-                  >
-                      <option value="Doce">Doce</option>
-                      <option value="HI">Salgado</option>
-                      <option value="CA">Café da manhã</option>
-                      <option value="NV">Completo</option>
-                      <option value="OR">Sustentáveis</option>
-                      <option value="WA">Almoço</option>
+
+                      </optgroup>
                    
-                  </select>
+                    </select>
+                    <br>
+              
+                  
+                    <br>
+                  
+                  <h4 class="card-title">Escreva aqui</h4>
+                  <!-- Create the editor container -->
+                  <div id="editor" style="height: 300px">
+                    <p>Hello World!</p>
+                    <p>Some initial <strong>bold</strong> text</p>
+                    <p>
+                      <br />
+                    </p>
+                  </div>
                 </div>
               </div>
-              <!-- Create the editor container -->
-              <div id="editor" style="height: 300px">
-                <p>Receita</p>
-              
-                <p>
-                  <br />
-                </p>
+                  
+              <div class="border-top">
+                <div class="card-body">
+                  <button type="button" class="btn btn-primary">
+                    Enviar
+                  </button>
+                </div>
               </div>
-
-              
-             
+            </div>
+         
+            </div>
             
           </div>
-          <button
-          type="button"
-          class="btn btn-success btn-sm text-white"
-        >
-          Publicar
-        </button>
-        </div>
-          </div>
-          <!-- editor -->
-       
           <!-- ============================================================== -->
           <!-- End PAge Content -->
           <!-- ============================================================== -->
@@ -390,60 +410,29 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
-    <script src="../dist/js/waves.js"></script>
+    <script src="dist/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="../dist/js/sidebarmenu.js"></script>
+    <script src="dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
+    <script src="dist/js/custom.min.js"></script>
     <!-- This Page JS -->
-    <script src="../assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-    <script src="../dist/js/pages/mask/mask.init.js"></script>
-    <script src="../assets/libs/select2/dist/js/select2.full.min.js"></script>
-    <script src="../assets/libs/select2/dist/js/select2.min.js"></script>
-    <script src="../assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-    <script src="../assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-    <script src="../assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-    <script src="../assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
-    <script src="../assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="../assets/libs/quill/dist/quill.min.js"></script>
-    <script>
-      $(function () {
-        // Success Type
-        $("#ts-success").on("click", function () {
-          toastr.success("Have fun storming the castle!", "Miracle Max Says");
-        });
-
-        // Success Type
-        $("#ts-info").on("click", function () {
-          toastr.info(
-            "We do have the Kapua suite available.",
-            "Turtle Bay Resort"
-          );
-        });
-
-        // Success Type
-        $("#ts-warning").on("click", function () {
-          toastr.warning(
-            "My name is Inigo Montoya. You killed my father, prepare to die!"
-          );
-        });
-
-        // Success Type
-        $("#ts-error").on("click", function () {
-          toastr.error(
-            "I do not think that word means what you think it means.",
-            "Inconceivable!"
-          );
-        });
-      });
-    </script>
+    <script src="assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="dist/js/pages/mask/mask.init.js"></script>
+    <script src="assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+    <script src="assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+    <script src="assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+    <script src="assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/libs/quill/dist/quill.min.js"></script>
     <script>
       //***********************************//
       // For select 2
