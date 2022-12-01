@@ -34,10 +34,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="#" method="post">
-                        <input type="search" name="search" placeholder="Type any keywords...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
+                        
+                        <input type="search" name="search" id="searchInput" placeholder="Type any keywords...">
+                        <button type="submit" onclick="searchRecipe()" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    
                 </div>
             </div>
         </div>
@@ -387,8 +387,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
-
+    
     <script>
+        const generalDataFromServer = []
+        const filtredData = []
+
         async function getData() {
             const urlAtual = window.location.href;
         const urlClass = new URL(urlAtual);
@@ -406,6 +409,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const postDiv = document.getElementsByClassName("blog-posts-area")[0]
 
             const posts = document.createElement("div")
+
+            generalDataFromServer.push(dataFromServer)
            
              dataFromServer.forEach(element => {
                 posts.innerHTML += `
@@ -432,14 +437,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
         window.onload = getData()
-    </script>
-    <script>
+   
         async function verifyUserStatus() {
             if(localStorage.getItem("auth")) {
             const userData = {"id": localStorage.getItem("id")}
               fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
               .then((response) => response.json())
-              .then((data) => insertUserData(data));
+              .then((data) => {
+                  insertUserData(data)
+                  
+                });
             }
         }
 
@@ -448,6 +455,55 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
             document.getElementById("login-text").innerHTML = nome
         }
+
+        function searchRecipe() {
+                let input = document.getElementById('searchInput').value
+                input = input.toLowerCase();
+                
+                let x = generalDataFromServer[0]
+                for (i = 0; i < x.length; i++) {
+                    if(input != "") {
+                        if(x[i].nome == input) {
+                            filtredData.push(x[i])
+                        }
+                    }
+                    showDataSearched(filtredData)
+                }
+
+                function showDataSearched(dataFromServer) {
+            const postDiv = document.getElementsByClassName("blog-posts-area")[0]
+
+            const posts = document.createElement("div")
+
+            if(dataFromServer.length == 0) {
+                postDiv.replaceChildren(dataFromServer)
+            }
+            else {
+                dataFromServer.forEach(element => {
+                   posts.innerHTML = `
+                   <div class="single-blog-area mb-80">
+                               <!-- Thumbnail -->
+                               <div class="blog-thumbnail">
+                                   <img src=${element.img}" alt="">
+                                   <!-- Post Date -->
+                                
+                               </div>
+                               <!-- Content -->
+                               <div class="blog-content">
+                                   <a href="http://127.0.0.1:5500/delicious-master/receipe-post.html?id=${element.idReceitas}" class="post-title">${element.nome}</a>
+                                   </div>
+                                   <p>${element.descricao}</p>
+                                   <a href="http://127.0.0.1:5500/delicious-master/receipe-post.html?id=${element.idReceitas}" class="btn delicious-btn mt-30">Ver receita</a>
+                               </div>
+                           </div>
+                   
+                   `
+                });
+               
+                 postDiv.replaceChildren(posts)
+            }
+        }
+            }
 
         window.onload = verifyUserStatus()
     </script>

@@ -418,6 +418,33 @@ textarea:focus {
   .search-wrapper.on {
     top: 0; }
 
+  #searchInput{
+    width: 90%;
+      height: 40px;
+      border: 2px solid #ffffff;
+      font-size: 12px;
+      font-style: italic;
+      padding: 0 20px;
+      margin: 15px 0; }
+      @media only screen and (max-width: 767px) {
+        #searchInput form input {
+          width: 80%; } 
+  }
+  #searchButton{
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    z-index: 1;
+    top: 15px;
+    border: none;
+    right: 10%;
+    cursor: pointer;
+    outline: none; }
+    @media only screen and (max-width: 767px) {
+      .search-button form button {
+        right: 20%; }
+  }
+
 /* :: 5.0 Header Area CSS */
 .header-area {
   position: relative;
@@ -601,7 +628,6 @@ textarea:focus {
       @media only screen and (max-width: 767px) {
         .header-area .delicious-main-menu .classynav .nav-text {
           margin-left: 30px;
-       
         } }
   @media only screen and (max-width: 767px) {
     .header-area .nav-brand img {
@@ -1522,7 +1548,7 @@ textarea:focus {
 #cardcategoriaenviesuareceita{
   color: white;
 }
-<<<<<<< Updated upstream
+
 input[type='file'] {
   display: none
 }
@@ -1554,7 +1580,6 @@ input[type='file'] {
 .envie-sua-foto{
   padding-left: 15px;
 }
-=======
 
 
 
@@ -1562,4 +1587,4 @@ input[type='file'] {
 .fa-instagram {
     font-size: 70px;
 }
->>>>>>> Stashed changes
+
