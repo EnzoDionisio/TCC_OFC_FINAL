@@ -488,9 +488,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         async function verifyUserStatus() {
             if(localStorage.getItem("auth")) {
             const userData = {"id": localStorage.getItem("id")}
-              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
-              .then((response) => response.json())
-              .then((data) => insertUserData(data));
+            fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => insertUserData(data));
             }
         }
 
