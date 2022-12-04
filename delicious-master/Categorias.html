@@ -223,11 +223,11 @@
                             <div class="outras-categorias">
                                 <a href=""></a><h2>Outras Categorias</h2></a>
                                 <div class="todas-categorias">
-                                <a href="categorias.html"><p>Doces</p></a>
-                                <a href="categorias.html"><p>Salgadas</p></a>
-                                <a href="categorias.html"><p>Sustentáveis</p></a>
-                                <a href="categorias.html"><p>Cafés</p></a>
-                                <a href="categorias.html"><p>Refeições</p></a>
+                                <a href="Categorias.html?tipo=Doces"><p>Doces</p></a>
+                                <a href="Categorias.html?tipo=Salgadas"><p>Salgadas</p></a>
+                                <a href="Categorias.html?tipo=Sustentáveis"><p>Sustentáveis</p></a>
+                                <a href="Categorias.html?tipo=Cafés"><p>Cafés</p></a>
+                                <a href="Categorias.html?tipo=Completos"><p>Refeições</p></a>
                                 </div>
                             </div>
                             
@@ -396,7 +396,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const urlAtual = window.location.href;
         const urlClass = new URL(urlAtual);
         const tipo = urlClass.searchParams.get("tipo");
-        
+
         if(tipo) {       
             await fetch(`http://localhost:8081/categoria/${tipo}`)
             .then((response) => response.json())

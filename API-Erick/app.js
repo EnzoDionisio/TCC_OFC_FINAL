@@ -228,6 +228,13 @@ app.post("/comentariosreceita", (req, res) => {
   })
 })
 
+app.post("/sendRecipe", (req, res) => {
+  console.log(req.body)
+})
+
+
+
+
 app.listen(8081, function () {
   console.log('rodando o serve');
 });

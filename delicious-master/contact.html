@@ -439,14 +439,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             document.getElementById("login-text").innerHTML = nome
         }
 
-        function sendRecipe() {
+        async function sendRecipe() {
             const name = document.getElementById("name").value
             const email = document.getElementById("email").value
             const subject = document.getElementById("subject").value
             const message = document.getElementById("message").value
             const inputFile = document.getElementById("input-file").value
 
-            console.log(inputFile)
+            const userData = {
+                "name": name,
+                "email": email,
+                "subject": subject,
+                "message": message,
+                "document": inputFile
+            }
+
+            await fetch("http://localhost:8081/sendRecipe", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+              .then((response) => response.json())
+              .then((data) => console.log(data));
         }
 
         window.onload = verifyUserStatus()
