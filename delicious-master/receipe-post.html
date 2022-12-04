@@ -327,6 +327,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="comentario">
+                        <h3 class="mb-4 mt-5">Comentários</h3>
+                        <div class="comentariosConteudo">
+                            
+
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -555,29 +567,45 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 console.log(data)
             });
         }
+
+        async function getComentario() {
+
+            const urlAtual = window.location.href;
+        const urlClass = new URL(urlAtual);
+        const id = urlClass.searchParams.get("id");
+
+            const comentData = {
+                    "recipeId": id,
+                    
+                }
+
+            await fetch(`http://localhost:8081/comentariosreceita`, {method: "POST", body: JSON.stringify(comentData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => {
+                insertComents(data)
+            })
+
+            function insertComents(dataFromServer) {
+                const commentsDiv = document.getElementsByClassName("comentariosConteudo")[0]
+                const commentsConjunct = document.createElement("div")
+
+                dataFromServer.forEach((comentario) => {
+                    commentsConjunct.innerHTML += `
+                    <div class="comentado mb-2">
+                                <h5>${comentario.nome}</h5>
+                                <p>${comentario.texto}</p>
+                            </div>
+                    `
+                })
+                commentsDiv.appendChild(commentsConjunct)
+            }
+        }
         
 
         
 
         window.onload = getData()
-    </script>
-    <script>
-        async function verifyUserStatus() {
-            if(localStorage.getItem("auth")) {
-            const userData = {"id": localStorage.getItem("id")}
-              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
-              .then((response) => response.json())
-              .then((data) => insertUserData(data));
-            }
-        }
-
-        function insertUserData(dataFromServer) {
-            const { nome } = dataFromServer
-
-            document.getElementById("login-text").innerHTML = nome
-        }
-
-        window.onload = verifyUserStatus()
+        window.onload = getComentario()
     </script>
 </body>
 

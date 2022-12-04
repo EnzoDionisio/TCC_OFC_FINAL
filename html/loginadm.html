@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+    <link rel="icon" href="img/core-img/salada.png">
+
+</head>
+<body>
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="img/core-img/salada.png" alt="">
+    </div>
+   
+    <nav class="navbar" style="background-color: #FFBF3B;">
+        <a class="navbar-brand" href="index.html">
+            <img src="img/core-img/logobuchosf.png"  width="100" height="50">
+          </a>
+
+          
+            </div>
+            </nav>  
+
+
+            
+<div id="central">
+    <div class="box">
+
+
+
+    
+        <div class="form-box">
+           
+            <h2>Entrar em sua conta</h2>
+            <form action="#">
+          
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite o seu email" required>
+                </div>
+
+             
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                    <span class="lnr lnr-ey" ><img id="olho" src="img/core-img/olhoaberto.png" width="50px"></span>
+
+                     
+                </div>
+                <div class="input-group">
+                    <button onclick="catchInputAndFetchData()">Continuar</button>
+                </div>
+               
+                <div class="registro">                <p> Ainda não tem conta? <a href="cadastro.html">Registre-se</a></p>
+                </div>
+
+
+
+
+               
+            </form>
+            
+        </div>
+        <div class="img-box">
+            <img src="img/core-img/logobuchosf.png" >
+        </div>
+        
+    </div>
+    </div>
+
+    <script src="js/cadastro.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+        async function catchInputAndFetchData() {
+            const email = document.getElementById("email").value
+            const senha = document.getElementById("password").value
+
+            const userData = 
+                {
+	                "email": email, 
+	                "senha": senha,
+               }
+
+            await fetch(`http://localhost:8081/login`, {"method": "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => verifyStatus(data));
+        }
+
+        function verifyStatus(userInfo) {
+            const {auth, message, userData, admin} = userInfo
+            const {id} = userData
+
+            if(auth && admin) {
+                localStorage.setItem("auth", auth)
+                localStorage.setItem("admin", admin)
+                localStorage.setItem("id", id)
+                alert(message)
+                window.location.href = "/html/indexadm.html"
+            }
+            else {
+                alert(message)
+            }
+        }
+            
+        
+
+    </script>
+    <script>
+        async function verifyUserStatus() {
+            if(localStorage.getItem("auth")) {
+            const userData = {"id": localStorage.getItem("id")}
+              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+              .then((response) => response.json())
+              .then((data) => insertUserData(data));
+            }
+        }
+
+        function insertUserData(dataFromServer) {
+            const { nome } = dataFromServer
+
+            document.getElementById("login-text").innerHTML = nome
+        }
+
+        window.onload = verifyUserStatus()
+    </script>
+</body>
+</html>

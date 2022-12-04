@@ -51,7 +51,7 @@ app.post('/cadastro', async (req,res) => {
       (error, result) => {
           if (result.length == 0) {
             const password = bcrypt.hashSync(senha, salt);
-              db.query("INSERT INTO `usuario`(`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES (NULL, ?, ?, ?, ?)",
+              db.query("INSERT INTO `usuario`(`idUsuario`, `nome`, `email`, `senha`, `telefone`, `admin`) VALUES (NULL, ?, ?, ?, ?, 0)",
                   [nome, email, password, telefone],
                   (error, result) => {
                       if (error) {
@@ -93,17 +93,25 @@ app.get('/categoria/:categoria', async (req, res) => {
 //login
 app.post('/login', async(req,res) =>{
   const {email, senha} = req.body
-  db.query("SELECT `idUsuario`, `nome`, `email`, `senha` FROM `usuario` WHERE `email` = ?",
+  db.query("SELECT `idUsuario`, `nome`, `email`, `senha`, `admin` FROM `usuario` WHERE `email` = ?",
     [email],
     (error , result) => {
+      const admin = result[0].admin
       const userData = {"id": result[0].idUsuario}
       if(result.length === 0){
         res.json({"auth": false, "message": "email não encontrado"})
         }
         else{
           if (result[0].email == email && compareHash(senha, result[0].senha)){
-            console.log("logado"),
-            res.json({ "auth": true, "message": "Logado com sucesso!", userData})
+            if(admin == 1) {
+              res.json({ "auth": true, "message": "Logado com sucesso!", userData, "admin": true})
+              console.log("admin")
+            }
+            else {
+              res.json({ "auth": true, "message": "Logado com sucesso!", userData, "admin": false})
+              console.log("não admin")
+
+            }
           }
           else{res.json({ "auth": false, "message": "E-mail ou senha incorretos"})}
         }
@@ -208,6 +216,16 @@ app.post("/deletecomentario", (req, res) => {
 
   db.query("UPDATE `comentarios` SET `deleted`= 1 WHERE `idComent` = ?",
   [idComent])
+})
+
+app.post("/comentariosreceita", (req, res) => {
+  const {recipeId} = req.body
+
+  db.query("SELECT `titulo`, `texto`, `nome` FROM `comentarios` WHERE `receitas_idReceitas` = ? && `aproved` = 1",
+  [recipeId],
+  (err, result) => {
+    res.json(result)
+  })
 })
 
 app.listen(8081, function () {
