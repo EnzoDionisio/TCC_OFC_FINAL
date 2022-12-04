@@ -177,7 +177,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-text text-center">
-                        <h2>Blog</h2>
+                        <h2 id="tpo-text">Blog</h2>
                     </div>
                 </div>
             </div>
@@ -396,11 +396,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const urlAtual = window.location.href;
         const urlClass = new URL(urlAtual);
         const tipo = urlClass.searchParams.get("tipo");
-
+        
         if(tipo) {       
             await fetch(`http://localhost:8081/categoria/${tipo}`)
             .then((response) => response.json())
             .then((data) => showData(data));
+
+            document.getElementById("tpo-text").innerHTML = tipo
         }
     }
 

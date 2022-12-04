@@ -248,7 +248,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="contact-form-area">
-                        <form action="#" method="post">
+                        <form>
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <input type="text" class="form-control" id="name" placeholder="Nome">
@@ -282,7 +282,7 @@
                                 </div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button class="btn delicious-btn mt-30" type="submit">Enviar</button>
+                                    <button class="btn delicious-btn mt-30" onclick="sendRecipe()">Enviar</button>
                                 </div>
                             </div>
                         </form>
@@ -437,6 +437,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const { nome } = dataFromServer
 
             document.getElementById("login-text").innerHTML = nome
+        }
+
+        function sendRecipe() {
+            const name = document.getElementById("name").value
+            const email = document.getElementById("email").value
+            const subject = document.getElementById("subject").value
+            const message = document.getElementById("message").value
+            const inputFile = document.getElementById("input-file").value
+
+            console.log(inputFile)
         }
 
         window.onload = verifyUserStatus()
