@@ -495,9 +495,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }
 
         function insertUserData(dataFromServer) {
-            const { nome } = dataFromServer
 
-            document.getElementById("login-text").innerHTML = nome
+                const { nome } = dataFromServer
+                document.getElementById("login-text").innerHTML = nome
+                if(nome) {
+                    const logoutButton = document.createElement("div")
+                    
+                    logoutButton.innerHTML = `
+                    <button id="buttonlogin" onclick='logout()'>Deslogar</button>`
+                    document.getElementsByClassName("classynav")[0].appendChild(logoutButton)
+                }
+            }
+
+        function logout() {
+            localStorage.removeItem("auth")
+            localStorage.removeItem("id")
+            window.location.reload()
         }
 
         window.onload = verifyUserStatus()

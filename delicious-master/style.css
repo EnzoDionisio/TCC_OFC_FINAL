@@ -362,7 +362,63 @@ textarea:focus {
     .delicious-btn {
       height: 40px;
       line-height: 39px; } }
-
+ /* Button login */     
+#buttonlogin{
+  
+  min-width: 10px;
+  height: 30px;
+  color: #0e0e0e;
+  border: none;
+  border-left: 3px solid #0e0e0e;
+  border-radius: 0;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 10px;
+  font-weight: 0;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  text-transform: capitalize;
+  background-color: #FFBF3B;
+}
+.delicious-btn.active, .delicious-btn:hover, .delicious-btn:focus {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fdfdfd;
+  background-color: #585751;
+  border-color: #000000; }
+.delicious-btn.btn-2 {
+  background-color: #FFBF3B;
+  border-color: #585751; }
+  .delicious-btn.btn-2.active, .delicious-btn.btn-2:hover, .delicious-btn.btn-2:focus {
+    background-color: #585751;
+    border-color: #FFBF3B; }
+.delicious-btn.btn-3 {
+  background-color: #FFBF3B;
+  border-color: #FFBF3B; }
+  .delicious-btn.btn-3.active, .delicious-btn.btn-3:hover, .delicious-btn.btn-3:focus {
+    background-color: #555452;
+    border-color: #FFBF3B; }
+.delicious-btn.btn-4 {
+  background-color: transparent;
+  border: 3px solid #FFBF3B;
+  line-height: 53px;
+  color: #1b1b1b; }
+  @media only screen and (max-width: 767px) {
+    .delicious-btn.btn-4 {
+      height: 40px;
+      line-height: 33px; } }
+  .delicious-btn.btn-4.active, .delicious-btn.btn-4:hover, .delicious-btn.btn-4:focus {
+    line-height: 53px;
+    color: #000000;
+    background-color: #FFBF3B; }
+    @media only screen and (max-width: 767px) {
+      .delicious-btn.btn-4.active, .delicious-btn.btn-4:hover, .delicious-btn.btn-4:focus {
+        height: 40px;
+        line-height: 33px; } }
+@media only screen and (max-width: 767px) {
+  .delicious-btn {
+    height: 40px;
+    line-height: 39px; } }
 /* :: 4.0 Search Wrapper */
 .search-wrapper {
   width: 100%;
@@ -505,7 +561,7 @@ textarea:focus {
         .header-area .delicious-main-menu .classy-navbar {
           height: 8px; } }
           .header-area .delicious-main-menu .classy-navbar .classynav{
-            width: 900px;
+            width: 950px;
           }
       .header-area .delicious-main-menu .classy-navbar .classynav ul li a {
         font-weight: 600; }

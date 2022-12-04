@@ -229,7 +229,11 @@ app.post("/comentariosreceita", (req, res) => {
 })
 
 app.post("/sendRecipe", (req, res) => {
-  console.log(req.body)
+  const { name, email, subject, message, document } = req.body
+
+  db.query("")
+
+
 })
 
 
