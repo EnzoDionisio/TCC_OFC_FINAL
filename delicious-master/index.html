@@ -341,9 +341,9 @@
                 <div class="col-12">
                     <!-- Cta Content -->
                     <div class="cta-content text-center">
-                        <h2>Conheça nossas receitas com frutas!</h2>
+                        <h2>Conheça nossas receitas sustentáveis!</h2>
                         <p>Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras sed accumsan neque. Ut vulputate, lectus vel aliquam congue, risus leo elementum nibh</p>
-                        <a href="#" class="btn delicious-btn">Discover all the receipies</a>
+                        <a href="#" class="btn delicious-btn">Descobrir todas as receitas!</a>
                     </div>
                 </div>
             </div>
@@ -488,9 +488,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         async function verifyUserStatus() {
             if(localStorage.getItem("auth")) {
             const userData = {"id": localStorage.getItem("id")}
-              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
-              .then((response) => response.json())
-              .then((data) => insertUserData(data));
+            fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => insertUserData(data));
             }
         }
 

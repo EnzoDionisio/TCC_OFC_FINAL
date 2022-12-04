@@ -40,12 +40,19 @@ INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES
 -- Estrutura da tabela `comentarios`
 --
 
+
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `idComent` int(11) NOT NULL,
   `receitas_idReceitas` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
   `titulo` varchar(75) DEFAULT NULL,
-  `texto` varchar(500) DEFAULT NULL
+  `texto` varchar(500) DEFAULT NULL,
+  `nome` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `aproved` int(11) NOT NULL,
+  `deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 
