@@ -1,9 +1,12 @@
-const express = require('express')
-const mysql = require('mysql2');
+import express from 'express'
+import mysql from 'mysql2'
+import bcrypt from 'bcrypt'
+import cors from 'cors'
+
 const app = express();
-const bcrypt = require('bcrypt');
-const cors = require('cors')
-const bodyParser = require('body-parser')
+import bodyParser from 'body-parser'
+
+import {storageImage} from './firebase.js'
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({
@@ -230,9 +233,8 @@ app.post("/comentariosreceita", (req, res) => {
 
 app.post("/sendRecipe", (req, res) => {
   const { name, email, subject, message, document } = req.body
-
-  db.query("")
-
+  
+  storageImage(document)
 
 })
 
