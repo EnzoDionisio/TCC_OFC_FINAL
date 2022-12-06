@@ -16,7 +16,6 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -487,9 +486,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
               .then((response) => response.json())
               .then((data) => console.log(data));
         }
-
+        
         window.onload = verifyUserStatus()
     </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="./js/firebase.js" type="module"></script>
 </body>
 
 </html>

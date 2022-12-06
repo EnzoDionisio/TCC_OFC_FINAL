@@ -469,7 +469,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 let x = generalDataFromServer[0]
                 for (i = 0; i < x.length; i++) {
                     if(input != "") {
-                        if(x[i].nome == input) {
+                        console.log(x[i].nome.toLowerCase().match(input))
+                        if(x[i].nome.match(input) != null) {
                             filtredData.push(x[i])
                         }
                     }
@@ -480,6 +481,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const postDiv = document.getElementsByClassName("blog-posts-area")[0]
 
             const posts = document.createElement("div")
+
+            const nullDiv = document.createElement("div")
+
+            nullDiv.innerHTML = `<div></div>`
+
+            postDiv.replaceChildren(nullDiv)
 
             if(dataFromServer.length == 0) {
                 postDiv.replaceChildren(dataFromServer)
