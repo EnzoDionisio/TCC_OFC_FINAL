@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Nov-2022 às 01:10
--- Versão do servidor: 10.4.25-MariaDB
--- versão do PHP: 8.1.10
+-- Tempo de geração: 07-Dez-2022 às 15:13
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -14,8 +14,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `bucho`
 --
-CREATE DATABASE IF NOT EXISTS `bucho` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `bucho`;
 
 -- --------------------------------------------------------
 
@@ -33,12 +31,12 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES
-(1, 'doce'),
-(2, 'salgado'),
-(3, 'cafe'),
-(4, 'completo'),
-(5, 'sustentavel'),
-(6, 'almoco');
+(1, 'Doces'),
+(2, 'Salgados'),
+(3, 'Cafés'),
+(4, 'Completos'),
+(5, 'Sustentáveis'),
+(6, 'Refeições');
 
 -- --------------------------------------------------------
 
@@ -63,7 +61,12 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`idComent`, `receitas_idReceitas`, `idUser`, `titulo`, `texto`, `nome`, `email`, `aproved`, `deleted`) VALUES
-(1, 2, 2, 'bullshit', 'aoba', 'Enzo', 'enzo.dionisio@outlook.com', 1, 0);
+(1, 2, 2, 'bullshit', 'aoba', 'Enzo', 'enzo.dionisio@outlook.com', 1, 0),
+(3, 3, 2, 'Gostei muito', 'adorei os detalhes do peixe', 'O pexe é lindo', 'enzo@sla@hotmail.com', 1, 0),
+(4, 3, 2, 'siiiiiiiiiiiiiiiiim', 'dnsadpasçdçasd', 'Arroz', 'pexe', 1, 0),
+(5, 3, 2, 'sadsa', 'dasdas', 'adasda', 'dasdas', 1, 0),
+(6, 3, 2, '', '', 'jenne', 'e', 1, 0),
+(7, 3, 2, 'sadadasd', 'eiasdasdasdasdasdadasd', 'jenne', 'feia', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -90,7 +93,10 @@ CREATE TABLE `receitas` (
 --
 
 INSERT INTO `receitas` (`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES
-(2, 'pexe', 'pexe.', '18anos', '', '[\"amor\", \"elemento X\"]', '[\"via sexo\"]', 1, 'qqwe', 'qweqwe', 4);
+(2, 'pexe', 'pexe.', '18anos', '', '[\"amor\", \"elemento X\", \"kkkkkk\"]', '[\"via \", \"adasdasd\"]', 1, 'qqwe', 'qweqwe', 4),
+(3, 'Mel', 'mel', '12313212horas', '20 porções', '[\"peixe\"]', '[\"mel\"]', 1, 'asd', 'asda', 1),
+(4, 'Bolinho de Brócolis', 'Bolinho de Brócolis com queijo na frigideira, rápido, pouquíssimos ingredientes e super fácil.', '30 minutos', '12 porções', '[\"300g de brócolis\" ,\"2½ colheres de farinha de trigo ou aveia \" ,\"Sal a gosto\" , \"Temperos à gosto \" ,\"100g de mussarela \" , \"2 ovos \" , \"Azeite \"]', '[\"Higienize e cozinhe o brócolis.\", \"Após o cozimento retirar os talos dos brócolis ( esses talos você pode utilizar na receita de panqueca de brócolis).\" ,\"Misture isso com os ovos, farinha, sal, temperos e a mussarela.\",\"Em uma frigideira com um fio de azeite coloque a misturinha e molde em formato de um círculo, espere até dourar ambos os lados.\",\"As porções depende do formato que você for fazer.\"]', 0, 'https://firebasestorage.googleapis.com/v0/b/bucho-cheio-f31b1.appspot.com/o/Receitas%20upadas%20manualmente%2FMicrosoftTeams-image%20(1).png?alt=media&token=d1bef506-9120-4a3e-943d-65c127e9d218', '', 5),
+(5, 'Bolo de Milho Enlatado', 'Bolo feito com milho enlatado, com ingredientes simples e baratos.', '40 minutos', '1 Bolo', '[\"1 lata de milho\", \"1 xícara (chá) de açúcar\", \"3 ovos\", \"1 xícara (chá) leite\", \"1 xícara (chá) milharina\", \"1 colher (sopa) de fermento em pó\", \"1/2 xícara (chá) de óleo\"]\r\n\r\n', '[\" Unte uma forma com furo no meio com manteiga e farinha de trigo\", \" Misture os ingredientes no liquidificador e bata até que o milho esteja bem moído\", \"3. Acrescente o fermento e pulse o liquidificador 3 vezes\", \" Coloque a massa na forma e leve ao forno pré-aquecido a 180º por aproximadamente 40 minutos\", \" Se necessário, faça o teste do palito para garantir o cozimento do bolo\"]', 0, 'https://firebasestorage.googleapis.com/v0/b/bucho-cheio-f31b1.appspot.com/o/Receitas%20upadas%20manualmente%2Fbologrande.png?alt=media&token=92c04491-56df-48f3-bb38-0b96ad788083', '', 1);
 
 -- --------------------------------------------------------
 
@@ -103,15 +109,16 @@ CREATE TABLE `usuario` (
   `nome` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(300) NOT NULL,
-  `telefone` varchar(45) NOT NULL
+  `telefone` varchar(45) NOT NULL,
+  `admin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `senha`, `telefone`) VALUES
-(2, 'Enzo', 'pexe', '$2b$12$HWCu/pR1jjSySsyo7Ci98Oausn3Rn4GJZEYJNmKRiOuhZ3GptHXA6', '11993486470');
+INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `senha`, `telefone`, `admin`) VALUES
+(2, 'Enzo', 'pexe', '$2b$12$HWCu/pR1jjSySsyo7Ci98Oausn3Rn4GJZEYJNmKRiOuhZ3GptHXA6', '11993486470', 0);
 
 -- --------------------------------------------------------
 
@@ -213,13 +220,13 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `idComent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idComent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `receitas`
 --
 ALTER TABLE `receitas`
-  MODIFY `idReceitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idReceitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
