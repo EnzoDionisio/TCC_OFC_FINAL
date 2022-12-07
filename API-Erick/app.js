@@ -244,9 +244,6 @@ app.post("/sendRecipe", (req, res) => {
   passosArray = `"[${passos}]"`
   ingredientesArray = `"[${ingredientes}]"`
 
-  console.log(passosArray)
-  console.log(ingredientesArray)
-
   db.query("INSERT INTO `receitas`(`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES (null,?,?,?,?,?,?,?,?,?,?)", 
   [name, descricao, tempo, rendimento, ingredientesArray, passosArray, 0, image_url, null, categoria], 
   (err, result) => {
@@ -257,14 +254,24 @@ app.post("/sendRecipe", (req, res) => {
 })
 
 app.get("/receitasadmin", (req, res) => {
-  db.query("SELECT * FROM `receitas` WHERE `aprovado` = 0", 
+  db.query("SELECT * FROM `receitas` WHERE `aprovado` = 0 && `deleted` = 0", 
   (err, result) => {
     res.json(result)
   })
 })
 
 app.post("/aprovereceita", (req, res) => {
-  db.query("")
+  const {idReceita, titulo, rendimento, tempo, descricao, ingredientes, passos, categoria} = req.body
+
+  db.query("UPDATE `receitas` SET `nome`=?,`descricao`=?,`tempodepreparo`=?,`rendimento`=?,`ingredientes`=?,`mododepreparo`=?,`aprovado`=1,`Categorias_idCategoria`=? WHERE `idReceitas` = ?", 
+  [titulo, descricao, tempo, rendimento, ingredientes, passos, categoria, idReceita])
+})
+
+app.post("/deletereceita", (req, res) => {
+  const {idReceita} = req.body
+
+  db.query("UPDATE `receitas` SET `deleted` = 1 WHERE `idReceitas` = ?", 
+  [idReceita])
 })
 
 app.listen(8081, function () {

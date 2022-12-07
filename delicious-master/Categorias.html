@@ -453,23 +453,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         window.onload = getData()
    
-        async function verifyUserStatus() {
-            if(localStorage.getItem("auth")) {
-            const userData = {"id": localStorage.getItem("id")}
-              fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
-              .then((response) => response.json())
-              .then((data) => {
-                  insertUserData(data)
-                  
-                });
-            }
-        }
-
-        function insertUserData(dataFromServer) {
-            const { nome } = dataFromServer
-
-            document.getElementById("login-text").innerHTML = nome
-        }
+        
 
         function searchRecipe() {
                 let input = document.getElementById('searchInput').value
@@ -528,6 +512,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             }
 
         window.onload = verifyUserStatus()
+    </script>
+    <script>
+        async function verifyUserStatus() {
+            if(localStorage.getItem("auth")) {
+            const userData = {"id": localStorage.getItem("id")}
+            fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => insertUserData(data));
+            }
+        }
+
+        function insertUserData(dataFromServer) {
+
+                const { nome } = dataFromServer
+                document.getElementById("login-text").innerHTML = nome
+                if(nome) {
+                    const logoutButton = document.createElement("div")
+                    
+                    logoutButton.innerHTML = `
+                    <button id="buttonlogin" onclick='logout()'>Deslogar</button>`
+                    document.getElementsByClassName("classynav")[0].appendChild(logoutButton)
+                }
+            }
+
+        function logout() {
+            localStorage.removeItem("auth")
+            localStorage.removeItem("id")
+            window.location.reload()
+        }
+
+        window.onload = verifyUserStatus()
+
+        
     </script>
 </body>
 

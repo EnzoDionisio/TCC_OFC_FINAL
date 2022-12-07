@@ -568,7 +568,7 @@
         }
         console.log(commentData)
         fetch("http://localhost:8081/aprovereceita", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
-        
+        window.location.reload()
       }
 
       function deleteReceitas(idReceita) {
@@ -576,7 +576,7 @@
           "idReceita": idReceita
         }
         fetch("http://localhost:8081/deletereceita", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
-        
+        window.location.reload()
       }
 
       window.onload = fetchComments()

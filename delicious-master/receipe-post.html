@@ -239,11 +239,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="receipe-slider owl-carousel">
-                        <img src="img/bg-img/bg5.jpg" alt="">
-                        <img src="img/bg-img/bg5.jpg" alt="">
-                        <img src="img/bg-img/bg5.jpg" alt="">
-                    </div>
+                        <img id="imageSlide" src="img/bg-img/bg5.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -497,11 +493,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             const ingredientes = eval(dataFromServer.ingredientes)
             const preparo = eval(dataFromServer.mododepreparo)  
 
+            document.getElementById("imageSlide").src = dataFromServer.img
+
             newDiv.innerHTML = `<h2> ${dataFromServer.nome}</h2>
                             <div class="receipe-duration">
                                 <h6>Preparação: ${dataFromServer.tempodepreparo} </h6>
                                 <h6>Rendimento: ${dataFromServer.rendimento}</h6>
-                                <h6>Dificuldade: ${dataFromServer.dificuldade}</h6>
                             </div>`
                             
             ingredientes.forEach((element) => {
@@ -611,6 +608,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         window.onload = getData()
         window.onload = getComentario()
+    </script>
+    <script>
+        async function verifyUserStatus() {
+            if(localStorage.getItem("auth")) {
+            const userData = {"id": localStorage.getItem("id")}
+            fetch("http://localhost:8081/userdata", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+            .then((response) => response.json())
+            .then((data) => insertUserData(data));
+            }
+        }
+
+        function insertUserData(dataFromServer) {
+
+                const { nome } = dataFromServer
+                document.getElementById("login-text").innerHTML = nome
+                if(nome) {
+                    const logoutButton = document.createElement("div")
+                    
+                    logoutButton.innerHTML = `
+                    <button id="buttonlogin" onclick='logout()'>Deslogar</button>`
+                    document.getElementsByClassName("classynav")[0].appendChild(logoutButton)
+                }
+            }
+
+        function logout() {
+            localStorage.removeItem("auth")
+            localStorage.removeItem("id")
+            window.location.reload()
+        }
+
+        window.onload = verifyUserStatus()
+
+        
     </script>
 </body>
 

@@ -40,5 +40,9 @@ inputFile.addEventListener('change', (e) => {
 
      await fetch("http://localhost:8081/sendRecipe", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
       .then((response) => response.json())
-      .then((data) => {return data}); 
+      .then((data) => {
+        if(data.status) {
+          alert("Receita enviada com sucesso!")
+        }
+      }); 
 }
