@@ -192,12 +192,17 @@ app.post('/comentario', async (req, res) => {
   const {name, email, titulo, mensagem} = data
 
   console.log(req.body)
-
-  db.query("INSERT INTO `comentarios`(`idComent`, `receitas_idReceitas`, `titulo`, `texto`, `nome`, `email`, `idUser`, `aproved`, `deleted`) VALUES (null,?,?,?,?,?,?, 0, 0)",
-  [recipeId, titulo, mensagem, name, email, userId],
-  (err, result) => {
+  if(userId) {
+    db.query("INSERT INTO `comentarios`(`idComent`, `receitas_idReceitas`, `titulo`, `texto`, `nome`, `email`, `idUser`, `aproved`, `deleted`) VALUES (null,?,?,?,?,?,?, 0, 0)",
+    [recipeId, titulo, mensagem, name, email, userId],
+    (err, result) => {
+      res.json({"status": true, "message": "Comentário enviado com sucesso!"})
+    }
+    )
   }
-  )
+  else {
+    res.json({"status": false, "message": "Faça login para comentar, por favor."})
+  }
 });
 
 app.post('/comentarioadmin', async (req, res) => {
@@ -235,18 +240,20 @@ app.post("/sendRecipe", (req, res) => {
   const { data, image_url } = req.body
   const { name, email, rendimento, tempo, passosReceita, ingredientesReceita, categoria, descricao } = data
 
+  console.log(req.body)
   let passosArray = ""
   let ingredientesArray = ""
 
   const passos = passosReceita.split(',')
   const ingredientes = ingredientesReceita.split(',')
 
-  passosArray = `"[${passos}]"`
-  ingredientesArray = `"[${ingredientes}]"`
+  passosArray = `[${passos}]`
+  ingredientesArray = `[${ingredientes}]`
 
   db.query("INSERT INTO `receitas`(`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES (null,?,?,?,?,?,?,?,?,?,?)", 
   [name, descricao, tempo, rendimento, ingredientesArray, passosArray, 0, image_url, null, categoria], 
   (err, result) => {
+    console.log(err)
     if(!err) {
       res.json({"status": true})
     }
