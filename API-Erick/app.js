@@ -256,8 +256,16 @@ app.post("/sendRecipe", (req, res) => {
   })
 })
 
+app.get("/receitasadmin", (req, res) => {
+  db.query("SELECT * FROM `receitas` WHERE `aprovado` = 0", 
+  (err, result) => {
+    res.json(result)
+  })
+})
 
-
+app.post("/aprovereceita", (req, res) => {
+  db.query("")
+})
 
 app.listen(8081, function () {
   console.log('rodando o serve');

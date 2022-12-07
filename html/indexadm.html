@@ -330,86 +330,8 @@
                 
                   <!-- Comment Row -->
                   <div class="d-flex flex-row comment-row">
-                    <div class="p-2">
-                      <img
-                        src="assets/images/users/4.jpg"
-                        alt="user"
-                        width="50"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <div class="comment-text active w-100">
-                      <h6 class="font-medium">Nome Usuário</h6>
-                      <div class="form-outline">
-                        <a>Titulo da receita</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      <div class="form-outline">
-                        <a>E-mail</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      <div class="form-outline">
-                        <a>Rendimento</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      <div class="form-outline">
-                        <a>Tempo de preparo</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      
-                      
-                      <div class="form-outline">
-                        <a>Descrição</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-
-                 <div class="form-outline">
-                        <a>Ingredientes</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      <div class="form-outline">
-                        <a>Passo a passo da receita</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-                      <div class="form-outline">
-                        <a>Categoria</a>
-
-                        <input type="text" id="formControlDefault" class="form-control" />
-                      </div>
-
-                      <div class="form-outline">
-                        <a>Link da imagem</a>
-
-                      </div>
-                      <div class="comment-footer">
-                        
-                       
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm text-white"
-                        >
-                          Aprovar
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm text-white"
-                        >
-                          Deletar
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Comment Row -->
-                  
-                  </div>
-                </div>
+                    
+                    
               </div>
             
               <!-- card -->
@@ -535,8 +457,130 @@
         window.location.reload();
       }
 
+      async function fetchReceipes() {
+        fetch("http://localhost:8081/receitasadmin", {method: "GET", headers: {"Content-Type": "application/json"}})
+              .then((response) => response.json())
+              .then((data) => insertReceitas(data));
+      }
+
+      function insertReceitas(dataFromServer) {
+        let receitas = document.createElement("div")
+        const geralDiv = document.getElementsByClassName("d-flex flex-row comment-row")[0]
+        
+        dataFromServer.forEach(element => {
+          console.log(element)
+          receitas.innerHTML += `
+          <div class="p-2">
+                      <img
+                        src="assets/images/users/4.jpg"
+                        alt="user"
+                        width="50"
+                        class="rounded-circle"
+                      />
+                    </div>
+          <div class="comment-text active w-100 mb-5">
+                      <h6 class="font-medium">Nome Usuário</h6>
+                      <div class="form-outline">
+                        <a>Titulo da receita</a>
+
+                        <textarea type="text" id="titulo" class="form-control">${element.nome}</textarea>
+                      </div>
+                      <div class="form-outline">
+                        <a>Rendimento</a>
+
+                        <textarea type="text" id="rendimento" class="form-control">${element.rendimento}</textarea>
+                      </div>
+                      <div class="form-outline">
+                        <a>Tempo de preparo</a>
+
+                        <textarea type="text" id="tempo" class="form-control">${element.tempodepreparo}</textarea>
+                      </div>
+                      
+                      
+                      <div class="form-outline">
+                        <a>Descrição</a>
+
+                        <textarea type="text" id="descricao" class="form-control">${element.descricao}</textarea> 
+
+                      </div>
+                      
+                 <div class="form-outline">
+                        <a>Ingredientes</a>
+
+                        <textarea type="text" id="ingredientes" class="form-control" >${element.ingredientes}</textarea>
+                      </div>
+                      <div class="form-outline">
+                        <a>Passo a passo da receita</a>
+
+                        <textarea type="text" id="mododepreparo" class="form-control">${element.mododepreparo}</textarea>
+
+                      </div>
+                      <div class="form-outline">
+                        <a>Categoria</a>
+
+                        <input type="text" id="categoria" class="form-control" value=${element.Categorias_idCategoria} />
+                      </div>
+
+                      <div class="form-outline m-2">
+                        <a href=${element.img}>Link da imagem</a>
+
+                      </div>
+                      <div class="comment-footer">
+                        
+                       
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm text-white"
+                          onclick="aproveReceitas(${element.idReceitas})"
+                        >
+                          Aprovar
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm text-white"
+                          onclick="deleteReceitas(${element.idReceitas})"
+                        >
+                          Deletar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Comment Row -->
+                  
+                  </div>
+                </div>
+          `
+        });
+
+        geralDiv.appendChild(receitas)
+      }
+
+      function aproveReceitas(idReceita) {
+        const commentData = {
+          "idReceita": idReceita,
+          "titulo": document.getElementById("titulo").value,
+          "rendimento": document.getElementById("rendimento").value,
+          "tempo": document.getElementById("tempo").value,
+          "descricao": document.getElementById("descricao").value,
+          "ingredientes": document.getElementById("ingredientes").value,
+          "passos": document.getElementById("mododepreparo").value,
+          "categoria": document.getElementById("categoria").value
+        }
+        console.log(commentData)
+        fetch("http://localhost:8081/aprovereceita", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
+        
+      }
+
+      function deleteReceitas(idReceita) {
+        const commentData = {
+          "idReceita": idReceita
+        }
+        fetch("http://localhost:8081/deletereceita", {method: "POST", body: JSON.stringify(commentData), headers: {"Content-Type": "application/json"}})
+        
+      }
 
       window.onload = fetchComments()
+      window.onload = fetchReceipes()
     </script>
   </body>
 </html>
