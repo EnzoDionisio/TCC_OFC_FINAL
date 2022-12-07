@@ -232,10 +232,28 @@ app.post("/comentariosreceita", (req, res) => {
 })
 
 app.post("/sendRecipe", (req, res) => {
-  const { name, email, subject, message, document } = req.body
-  
-  storageImage(document)
+  const { data, image_url } = req.body
+  const { name, email, rendimento, tempo, passosReceita, ingredientesReceita, categoria, descricao } = data
 
+  let passosArray = ""
+  let ingredientesArray = ""
+
+  const passos = passosReceita.split(',')
+  const ingredientes = ingredientesReceita.split(',')
+
+  passosArray = `"[${passos}]"`
+  ingredientesArray = `"[${ingredientes}]"`
+
+  console.log(passosArray)
+  console.log(ingredientesArray)
+
+  db.query("INSERT INTO `receitas`(`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES (null,?,?,?,?,?,?,?,?,?,?)", 
+  [name, descricao, tempo, rendimento, ingredientesArray, passosArray, 0, image_url, null, categoria], 
+  (err, result) => {
+    if(!err) {
+      res.json({"status": true})
+    }
+  })
 })
 
 

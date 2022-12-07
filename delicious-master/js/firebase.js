@@ -12,6 +12,33 @@
   };
 
   // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(firebaseConfig)
 
-  console.log(firebase.app()); 
+  const storage = firebase.storage()
+
+  let image_url = ""
+  const inputFile = document.getElementById("input-file")
+
+inputFile.addEventListener('change', (e) => {
+  let file = e.target.files[0]
+
+    const uploadTask = storage.ref(`categorias/${file.name}`).put(file)
+
+    uploadTask.on("state_changed", () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((url_imagem) => {
+        image_url = url_imagem
+      })
+    })
+  })
+  
+
+  export default async function sendRecipe(data) {
+    const userData = {
+        data,
+        "image_url": image_url
+    }
+
+     await fetch("http://localhost:8081/sendRecipe", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
+      .then((response) => response.json())
+      .then((data) => {return data}); 
+}

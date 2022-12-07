@@ -1,7 +1,11 @@
--- criar e selecionar banco de dados
-CREATE database IF NOT EXISTS bucho;
-USE bucho;
-
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 06-Dez-2022 às 22:04
+-- Versão do servidor: 10.4.25-MariaDB
+-- versão do PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -17,7 +21,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `categorias`
 --
 
-CREATE TABLE IF NOT EXISTS `categorias` (
+CREATE TABLE `categorias` (
   `idCategoria` int(11) NOT NULL,
   `nomeCategoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -27,12 +31,12 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 --
 
 INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES
-(1, 'doce'),
-(2, 'salgado'),
-(3, 'cafe'),
-(4, 'completo'),
-(5, 'sustentavel'),
-(6, 'almoco');
+(1, 'Doces'),
+(2, 'Salgados'),
+(3, 'Cafés'),
+(4, 'Completos'),
+(5, 'Sustentáveis'),
+(6, 'Refeições');
 
 -- --------------------------------------------------------
 
@@ -40,8 +44,7 @@ INSERT INTO `categorias` (`idCategoria`, `nomeCategoria`) VALUES
 -- Estrutura da tabela `comentarios`
 --
 
-
-CREATE TABLE IF NOT EXISTS `comentarios` (
+CREATE TABLE `comentarios` (
   `idComent` int(11) NOT NULL,
   `receitas_idReceitas` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -53,6 +56,13 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `comentarios`
+--
+
+INSERT INTO `comentarios` (`idComent`, `receitas_idReceitas`, `idUser`, `titulo`, `texto`, `nome`, `email`, `aproved`, `deleted`) VALUES
+(1, 2, 2, 'bullshit', 'aoba', 'Enzo', 'enzo.dionisio@outlook.com', 1, 0),
+(2, 3, 2, 'sssssssssss', 'sssssssssssss', 'sssssssssssss', 'ssssssssssss', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 -- Estrutura da tabela `receitas`
 --
 
-CREATE TABLE IF NOT EXISTS`receitas` (
+CREATE TABLE `receitas` (
   `idReceitas` int(11) NOT NULL,
   `nome` varchar(70) NOT NULL,
   `descricao` varchar(250) NOT NULL,
@@ -78,23 +88,31 @@ CREATE TABLE IF NOT EXISTS`receitas` (
 -- Extraindo dados da tabela `receitas`
 --
 
+INSERT INTO `receitas` (`idReceitas`, `nome`, `descricao`, `tempodepreparo`, `rendimento`, `ingredientes`, `mododepreparo`, `aprovado`, `img`, `video`, `Categorias_idCategoria`) VALUES
+(2, 'pexe', 'pexe.', '18anos', '', '[\"amor\", \"elemento X\"]', '[\"via sexo\"]', 1, 'qqwe', 'qweqwe', 4),
+(3, 'Mel', 'mel', '12313212horas', '20 porções', '[\"peixe\"]', '[\"mel\"]', 1, 'asd', 'asda', 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS`usuario` (
+CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(300) NOT NULL,
-  `telefone` varchar(45) NOT NULL
+  `telefone` varchar(45) NOT NULL,
+  `admin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+--
 -- Extraindo dados da tabela `usuario`
 --
+
+INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `senha`, `telefone`, `admin`) VALUES
+(2, 'Enzo', 'pexe', '$2b$12$HWCu/pR1jjSySsyo7Ci98Oausn3Rn4GJZEYJNmKRiOuhZ3GptHXA6', '11993486470', 0);
 
 -- --------------------------------------------------------
 
@@ -102,7 +120,7 @@ CREATE TABLE IF NOT EXISTS`usuario` (
 -- Estrutura da tabela `usucom`
 --
 
-CREATE TABLE IF NOT EXISTS`usucom` (
+CREATE TABLE `usucom` (
   `idUsuCom` int(11) NOT NULL,
   `comentarios_idComent` int(11) DEFAULT NULL,
   `usuario_idUsuario` int(11) DEFAULT NULL
@@ -114,15 +132,21 @@ CREATE TABLE IF NOT EXISTS`usucom` (
 -- Estrutura da tabela `usufav`
 --
 
-CREATE TABLE IF NOT EXISTS`usufav` (
+CREATE TABLE `usufav` (
   `idFav` int(11) NOT NULL,
   `idUsuFav` int(11) NOT NULL,
-  `idReceitFav` int(11) NOT NULL
+  `idReceitFav` int(11) NOT NULL,
+  `titulo` varchar(1000) NOT NULL,
+  `descricao` varchar(5000) NOT NULL,
+  `img` varchar(5000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usufav`
 --
+
+INSERT INTO `usufav` (`idFav`, `idUsuFav`, `idReceitFav`, `titulo`, `descricao`, `img`) VALUES
+(2, 2, 2, 'pexe', 'pexe.', 'qqwe');
 
 --
 -- Índices para tabelas despejadas
@@ -190,19 +214,19 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `idComent` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idComent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `receitas`
 --
 ALTER TABLE `receitas`
-  MODIFY `idReceitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idReceitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `usucom`
@@ -214,7 +238,7 @@ ALTER TABLE `usucom`
 -- AUTO_INCREMENT de tabela `usufav`
 --
 ALTER TABLE `usufav`
-  MODIFY `idFav` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idFav` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para despejos de tabelas

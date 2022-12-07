@@ -16,6 +16,10 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="./js/firebase.js" type="module"></script>
 </head>
 
 <body>
@@ -240,6 +244,9 @@
                 <div class="col-12">
                     <div class="section-heading">
                         <h3>Envie sua receita!</h3>
+                        <br>
+                         <p>Escreva aqui os ingredientes e o modo de preparo em sequência e separados por vírgula
+                            ex: Você vai precisar de: farinha, ovo, leite, Para fazer a  receita misture os ingredientes, adicione x alimento, leve ao forno.</p>
                     </div>
                 </div>
             </div>
@@ -247,34 +254,45 @@
             <div class="row">
                 <div class="col-12">
                     <div class="contact-form-area">
-                        <form>
+                        
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <input type="text" class="form-control" id="name" placeholder="Nome">
+                                    <input type="text" class="form-control" id="name" placeholder="Título da Receita">
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <input type="email" class="form-control" id="email" placeholder="E-mail">
                                 </div>
+                                <div class="col-12 col-lg-6">
+                                    <input type="text" class="form-control" id="rendimento" placeholder="Rendimento">
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <input type="email" class="form-control" id="tempoReceita" placeholder="Tempo de Preparo">
+                                </div>
+                              
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="subject" placeholder="Título da receita">
+                                    <input type="text" class="form-control" id="descricao" placeholder="Descrição">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="ingredientes" placeholder="Ingredientes">
                                 </div>
                                 
                                 <div class="col-12">
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Receita"></textarea>
+                                    <textarea name="message" class="form-control" id="passos" cols="30" rows="10" placeholder="Passo a Passo da receita"></textarea>
                                     <div>
+                                        
+                                        <label class="textoselectcategoria">Selecione uma categoria abaixo</label>
                                         <select
-                                          class="select2 form-select shadow-none mt-3"
+                                          class="selectcategoria"
                                           multiple="multiple"
-                                          style="height: 36px; width: 100%"
+                                      
                                         >
                                           <optgroup label="Categorias">
-                                            <option value="Doc">Doces</option>
-                                            <option value="Salg">Salgadas</option>
-                                            <option value="Compl">Completo</option>
-                                            <option value="Cafe">Café da manhã</option>
-                                            <option value="AlmJant">Almoço/jantar</option>
-                                            <option value="ReceiSus">Receitas Sustentáveis</option>
-                    
+                                            <option value="1">Doces</option>
+                                            <option value="2">Salgadas</option>
+                                            <option value="3">Café da manhã</option>
+                                            <option value="4">Completo</option>
+                                            <option value="5">Receitas Sustentáveis</option>
+                                            <option value="6">Almoço/jantar</option>
                     
                                           </optgroup>
                                        
@@ -303,13 +321,15 @@
                                 </div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button class="btn delicious-btn mt-30" onclick="sendRecipe()">Enviar</button>
+                                    <button class="btn delicious-btn mt-30" >Enviar</button>
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
+                    
                 </div>
             </div>
+            
         </div>
     </div>
     <script>
@@ -322,9 +342,7 @@
     <!-- ##### Contact Form Area End ##### -->
 
     <!-- ##### Google Maps ##### -->
-    <div class="map-area">
-        <div id="googleMap"></div>
-    </div>
+    
 
     <!-- ##### Follow Us Instagram Area Start ##### -->
     <div class="follow-us-instagram">
@@ -467,30 +485,40 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             document.getElementById("login-text").innerHTML = nome
         }
 
-        async function sendRecipe() {
-            const name = document.getElementById("name").value
-            const email = document.getElementById("email").value
-            const subject = document.getElementById("subject").value
-            const message = document.getElementById("message").value
-            const inputFile = document.getElementById("input-file").value
-
-            const userData = {
-                "name": name,
-                "email": email,
-                "subject": subject,
-                "message": message,
-                "document": inputFile
-            }
-
-            await fetch("http://localhost:8081/sendRecipe", {method: "POST", body: JSON.stringify(userData), headers: {"Content-Type": "application/json"}})
-              .then((response) => response.json())
-              .then((data) => console.log(data));
-        }
-        
         window.onload = verifyUserStatus()
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="./js/firebase.js" type="module"></script>
-</body>
+    
+    <script type="module">
+        import sendRecipe from './js/firebase.js'
 
+        const sendButton = document.getElementsByClassName("btn delicious-btn")[0]
+
+        sendButton.addEventListener("click", () => {
+            const name = document.getElementById("name").value
+            const email = document.getElementById("email").value
+            const rendimento = document.getElementById("rendimento").value
+            const descricao = document.getElementById("descricao").value
+            const tempo = document.getElementById("tempoReceita").value
+            const passosReceita = document.getElementById("passos").value
+            const ingredientesReceita = document.getElementById("ingredientes").value
+            const categoria = document.getElementsByClassName("selectcategoria")[0].value
+
+            /* if(name != "" && email != "" && rendimento != "" && tempo != "" && passosReceita != "" && ingredientesReceita != "" && categoria != "" && descricao != "") {
+            } */
+                const userData = {
+                    "name": name,
+                    "email": email,
+                "rendimento": rendimento,
+                "tempo": tempo,
+                "passosReceita": passosReceita,
+                "ingredientesReceita": ingredientesReceita,
+                "categoria": categoria,
+                "descricao": descricao
+            }
+            
+            sendRecipe(userData)
+        })
+
+    </script>
+</body>
 </html>

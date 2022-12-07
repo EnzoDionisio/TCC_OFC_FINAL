@@ -1644,3 +1644,9 @@ input[type='file'] {
 padding-bottom: 15px;
 padding-top: 20px;
 }
+.selectcategoria{
+  margin-bottom: 15px
+}
+.textoselectcategoria{
+  margin-left: 5px;
+}
