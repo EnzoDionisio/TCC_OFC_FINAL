@@ -561,8 +561,12 @@ textarea:focus {
         .header-area .delicious-main-menu .classy-navbar {
           height: 8px; } }
           .header-area .delicious-main-menu .classy-navbar .classynav{
-            width: 950px;
+            width: 1000px;
           }
+          #deliciousNav{
+            width: 1150px;
+          }
+  
       .header-area .delicious-main-menu .classy-navbar .classynav ul li a {
         font-weight: 600; }
         .header-area .delicious-main-menu .classy-navbar .classynav ul li a:hover, .header-area .delicious-main-menu .classy-navbar .classynav ul li a:focus {
