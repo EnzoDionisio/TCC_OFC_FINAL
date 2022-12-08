@@ -476,7 +476,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         await fetch(`http://localhost:8081/buscareceita/${id}`)
             .then((response) => response.json())
-            .then((data) => showData(data));
+            .then((data) => console.log(showData(data)));
+            
         }
 
         function showData(dataFromServer) {
